@@ -10,6 +10,7 @@ import './landing.scss'
 import LoadingComponent from "./../../components/Loading/component"
 
 import { renderExample } from './../../services/example'
+import Navbar from '../../components/Navbar'
 
 class LandingPage extends Component {
     state = {
@@ -49,6 +50,7 @@ class LandingPage extends Component {
 
         return (
             <>
+                <Navbar />
                 <Row className="text-center mt-3 mb-5 p-5">
                     <Col xs="12" className="text-center">
                         <div className="border m-2 rounded p-5">
