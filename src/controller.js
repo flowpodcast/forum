@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import {
@@ -10,16 +10,16 @@ import './index.scss'
 // Components
 import LandingPage from './pages/Landing'
 
-class MainController extends Component {
-  render() {
-    return (
-      <Router>
-        <Container id="main" fluid>
-          <Route exact path="/" component={LandingPage} />
-        </Container>
-      </Router>
-    )
-  }
+function MainController() {
+
+  return (
+    <Router>
+      <Container id="main" fluid>
+        <Route exact path="/" component={LandingPage} />
+      </Container>
+    </Router>
+  )
+
 }
 
 export default MainController
