@@ -1,66 +1,137 @@
-import React, { Component } from 'react'
-import {
-    Button,
-    Col,
-    Row,
-} from 'reactstrap'
+import React from 'react'
 
-import './landing.scss'
+import { Header, DivBanner, MenuPersonal, HamburguerMenu, Chat } from './styles'
 
-import LoadingComponent from "./../../components/Loading/component"
+import { ReactComponent as Logo } from '../../assets/logo/FlowLogo.svg'
 
-import { renderExample } from './../../services/example'
-import Navbar from '../../components/Navbar'
+import Banner from '../../assets/imgs/BannerFlow.png'
 
-class LandingPage extends Component {
-    state = {
-        loading: true,
-        alert: {
-            status: false,
-            message: '',
-            color: ''
-        },
-        message: ''
+import { BsSearch } from 'react-icons/bs'
+import { GoPencil } from 'react-icons/go'
+import { AiFillStar } from 'react-icons/ai'
+import { GiHamburgerMenu } from 'react-icons/gi'
+
+export default function Landing() {
+
+    function openMenu(menuName) {
+        const Menu = document.querySelector('.HamburguerMenu')
+        if (menuName === 'hamburguer') {
+            Menu.style.opacity = '1'
+            Menu.style.width = '300px'
+            Menu.style.height = '100%'
+        }
+        else if (menuName === 'personal') {
+            const PersonalMenu = document.querySelector('.PersonalMenu')
+            PersonalMenu.style.opacity = '1'
+            PersonalMenu.style.width = '350px'
+            PersonalMenu.style.height = '491px'
+        }
     }
 
-    componentDidMount = () => {
-        this.renderLP()
+    function closeMenu(menuName) {
+        if (menuName === 'hamburguer') {
+            const Menu = document.querySelector('.HamburguerMenu')
+            Menu.style.opacity = '0'
+            Menu.style.top = '87px'
+            Menu.style.width = '25px'
+            Menu.style.height = '25px'
+        }
+        else if (menuName === 'personal') {
+            const PersonalMenu = document.querySelector('.PersonalMenu')
+
+            PersonalMenu.style.opacity = '0'
+            PersonalMenu.style.width = '25px'
+            PersonalMenu.style.height = '25px'
+
+        }
     }
 
-    renderLP = () => {
-        let self = this
-        renderExample()
-            .then(response => {
-                console.log(response)
-                self.setState({
-                    loading: false,
-                    message: response.data.message
-                })
-            })
-    }
+    function handleHamburguerMenu() {
+        const Menu = document.querySelector('.HamburguerMenu')
+        const details = document.querySelector('details')
 
-    render() {
-        const { loading, message } = this.state
-
-        if (loading) {
-            return (
-                <LoadingComponent />
-            )
+        if (handlePersonalMenu) {
+            closeMenu('personal')
+            details.open = false
         }
 
-        return (
-            <>
-                <Navbar />
-                <Row className="text-center mt-3 mb-5 p-5">
-                    <Col xs="12" className="text-center">
-                        <div className="border m-2 rounded p-5">
-                            {message}
-                        </div>
-                    </Col>
-                </Row>
-            </>
-        )
+        if (Menu.style.opacity === '0') {
+            openMenu('hamburguer')
+        }
+        else {
+            closeMenu('hamburguer')
+        }
     }
-}
 
-export default LandingPage
+    function handlePersonalMenu(e) {
+        const details = document.querySelector('details')
+
+        if (handleHamburguerMenu) {
+            closeMenu('hamburguer')
+        }
+
+        if (!details.open) {
+            openMenu('personal')
+        }
+        else {
+            closeMenu('personal')
+        }
+    }
+
+
+
+
+
+    return (
+        <React.Fragment>
+            <Header>
+                <div>
+                    <Logo className="logo"></Logo>
+                </div>
+                <input type="text" name="search" placeholder="Pesquisar..." />
+                <BsSearch className="search-ico"></BsSearch>
+                <hr></hr>
+                <div className="container-menu">
+                    <GoPencil className="pencil-ico"></GoPencil>
+                    <figure >
+                    </figure>
+                    <div className="personal-infos">
+                        <span >GianlucaJux</span>
+                        <div className="info-level">
+                            <AiFillStar className="level-ico"></AiFillStar> <span>1239 KD</span>
+                        </div>
+                    </div>
+                    <details onClick={(e) => handlePersonalMenu(e)}>
+                        <summary></summary>
+                    </details>
+                    <GiHamburgerMenu className="menu-ico" onClick={handleHamburguerMenu} ></GiHamburgerMenu>
+                </div>
+            </Header>
+            <MenuPersonal className="PersonalMenu">
+            </MenuPersonal>
+            <HamburguerMenu className="HamburguerMenu">
+            </HamburguerMenu>
+            <DivBanner>
+                <img src={Banner} alt="Flow Podcast" />
+                <div className="div-group">
+                    <figure></figure>
+                    <h5>Flow</h5>
+                    <button>JOIN</button>
+                </div>
+            </DivBanner>
+        <Chat>
+        <div className="group-container">
+            <div className="search-groups"></div>
+            <div className="groups"></div>
+        </div>
+        <div className="group-infos">
+            <aside className="infos"></aside>
+            <aside className="advertisement">advertisement</aside>
+        </div>
+
+        </Chat>
+            
+        </React.Fragment>
+
+    )
+}
