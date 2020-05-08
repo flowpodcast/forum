@@ -2,6 +2,8 @@
 
 * {
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 #main {
@@ -9,6 +11,10 @@
     color: #000;
     background-color: #1E1E1E;
     font-family: 'Roboto', sans-serif;
-    margin: 0 auto;
+
     height: 100vh;
+}
+
+body{
+    overflow: hidden;
 }
