@@ -1,5 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import MainController from './controller'
+import React from 'react';
 
-ReactDOM.render(<MainController />, document.getElementById('root'));
+import ReactDOM from 'react-dom';
+
+import App from './App';
+
+ReactDOM.render(<App />, document.getElementById('root'));
