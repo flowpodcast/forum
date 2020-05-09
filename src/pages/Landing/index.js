@@ -32,16 +32,16 @@ export default function Landing() {
         if (menuName === 'hamburguer') {
             const Menu = document.querySelector('.HamburguerMenu')
             Menu.style.opacity = '0'
-            Menu.style.top = '87px'
+            Menu.style.top = '60px'
             Menu.style.width = '25px'
-            Menu.style.height = '25px'
+            Menu.style.height = '100%'
         }
         else if (menuName === 'personal') {
             const PersonalMenu = document.querySelector('.PersonalMenu')
 
             PersonalMenu.style.opacity = '0'
             PersonalMenu.style.width = '25px'
-            PersonalMenu.style.height = '25px'
+            PersonalMenu.style.height = '0px'
 
         }
     }
