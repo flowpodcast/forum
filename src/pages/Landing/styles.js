@@ -4,26 +4,30 @@ export const Header = styled.header`
     @import url('https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&display=swap');
 
     width: 100%;
-    height: 87px;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 100;
+		z-index: 100;		
+		padding: 0 1rem;
 
     div{
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 87px;
-        width: 190px;
-        margin-right: 2px;
-    }
+        height: 100%;
+        width: auto;
+				margin-right: 2px;				
+		}
+		
+		.logo {
+			margin-right: 20px;
+		}
 
     input{
-        display: flex;
-        width: 90%;
-        height: 40px;
-        border-radius: 5px;
+        width: 100%;
+        height: 2.2rem;
+        border-radius: 1px;
         border-color: transparent;
         outline: none;
         padding-left: 15px;
@@ -31,15 +35,15 @@ export const Header = styled.header`
         color: #fff;
         text-align: left;
         font-family: 'Blinker', sans-serif;
-        font-size: 22px;
+        font-size: 1.2rem;
         font-weight: normal;
         
     }   
 
     input::placeholder{
-        color: #141414;
+        color: #bbb;
         font-family: 'Blinker', sans-serif;
-        font-size: 22px;
+        font-size: 1.2rem;
         font-weight: normal;
         
     }   
@@ -60,8 +64,8 @@ export const Header = styled.header`
     }
     
     .container-menu{
-        width: 444px;
-        height: 87px;
+        width: auto;
+        height: 100%;
         z-index: 100;
     }
 
@@ -123,7 +127,7 @@ export const Header = styled.header`
         color: #fff;
         width: 25px;
         height: 25px;
-        margin-right: 30px;
+				margin-left: 10px;
         transition: .5s;
     }
     .menu-ico:hover{
@@ -136,9 +140,10 @@ export const Header = styled.header`
         justify-content: center;
         align-items: center;
         color: #fff;
-        width: 150px;
+        width: auto;
         height: 40px;
-        z-index: 100;
+				z-index: 100;
+				padding: 0 2rem 0 1rem;
     }
 
     .personal-infos span{
@@ -148,7 +153,8 @@ export const Header = styled.header`
     }
 
     .info-level{
-        margin-top: 5px;
+				margin-top: 5px;
+				width: 100%;
     }
 
     
@@ -165,7 +171,7 @@ export const DivBanner = styled.div`
 
     img{ 
         display: absolute;
-        top: 87px;
+        top: 60px;
         width: 1920px;
         height: 215px;
     }
@@ -244,7 +250,7 @@ export const MenuPersonal = styled.div`
  position: absolute;
  width: 25px;
  height: 25px;
- top: 87px;
+ top: 60px;
  right: 68px;
  background-color: #141414;
     opacity: 0;
@@ -256,12 +262,13 @@ export const HamburguerMenu = styled.div`
  position: absolute;
  width: 25px;
  height: 25px;
- top: 87px;
+ top: 60px;
  right: 0;
  background-color: #141414;
- transition: 0.5s;
+ transition: all 0.5s ease-in;
  opacity: 0;
  z-index: 100;
+ box-shadow: 0 10px 5px #141414;
 `;
 
 export const Chat = styled.main`
