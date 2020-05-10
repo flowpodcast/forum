@@ -25,11 +25,11 @@ jobs:
     runs-on: ubuntu-latest
 		steps:
 			- name: Checkout Repo
-        uses: actions/flowpodcast@develop
+        uses: actions/.github/workflows/main.yml@develop
         with:
           name: build
       - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
+        uses: actions/.github/workflows/main.yml@develop
       with:
         args: deploy --only hosting:forum
       env:
