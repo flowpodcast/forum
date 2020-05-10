@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: flowpodcast
     steps:
       - name: Yarn Installation
         run: |
@@ -24,7 +24,7 @@ jobs:
   deploy:
     name: Deploy
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: flowpodcast
     steps:
       - name: Checkout Repo
         uses: actions/flowpodcast@develop
