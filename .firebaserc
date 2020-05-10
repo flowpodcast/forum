@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "flowpodcast"
+  },
+	"targets": {
+		"flowpodcast": {
+			"hosting": {
+				"forum": [
+					"flowrum"
+				]
+			}
+		}
+	}
+}
