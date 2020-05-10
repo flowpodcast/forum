@@ -98,7 +98,7 @@ export default function Landing() {
                     <div className="personal-infos">
                         <span >GianlucaJux</span>
                         <div className="info-level">
-                            <AiFillStar className="level-ico"></AiFillStar> <span>3500 KD</span>
+                            <AiFillStar className="level-ico"></AiFillStar> <span>3750 KD</span>
                         </div>
                     </div>
                     <details onClick={(e) => handlePersonalMenu(e)}>
