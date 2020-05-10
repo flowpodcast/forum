@@ -16,7 +16,6 @@ export const Header = styled.header`
         justify-content: center;
         align-items: center;
         height: 100%;
-        width: auto;
 				margin-right: 2px;				
 		}
 		
@@ -260,12 +259,12 @@ export const MenuPersonal = styled.div`
 
 export const HamburguerMenu = styled.div`
  position: absolute;
- width: 25px;
- height: 25px;
+ width: 0px;
+ height: 100%;
  top: 70px;
  right: 0;
  background-color: #141414;
- transition: all 0.4s ease-in;
+ transition: all 0.5s ease-in;
  opacity: 0;
  z-index: 100;
  box-shadow: 0 10px 5px #141414;

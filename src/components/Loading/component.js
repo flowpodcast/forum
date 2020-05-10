@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+
 import {
   Container,
   Row,
   Col,
-} from 'reactstrap'
+} from 'reactstrap';
 
 function LoadingComponent() {
   return (
@@ -16,7 +17,7 @@ function LoadingComponent() {
         </Col>
       </Row>
     </Container>
-  )
+  );
 }
 
-export default LoadingComponent
+export default LoadingComponent;
