@@ -38,7 +38,7 @@ jobs:
         with:
           name: build
       - name: Deploy to Firebase
-        uses: w9jds/firebase-action@develop
+        uses: flowpodcast/firebase-action@develop
         with:
           args: deploy --only hosting
         env:
