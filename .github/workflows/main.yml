@@ -16,13 +16,13 @@ jobs:
           source ~/.profile
           npm install -g yarn
       - name: Checkout Repo
-        uses: actions/checkout@develop
+        uses: actions/.github/workflows/main.yml@develop
       - name: Install Dependencies
         run: yarn install
       - name: Build
         run: yarn build
       - name: Archive Production Artifact
-        uses: actions/upload-artifact@develop
+        uses: actions/.github/workflows/main.yml@develop
         with:
           name: build
           path: build
@@ -32,9 +32,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@develop
+        uses: actions/.github/workflows/main.yml@develop
       - name: Download Artifact
-        uses: actions/download-artifact@develop
+        uses: actions/.github/workflows/main.yml@develop
         with:
           name: build
       - name: Deploy to Firebase
