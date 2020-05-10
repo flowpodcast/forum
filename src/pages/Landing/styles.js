@@ -4,7 +4,7 @@ export const Header = styled.header`
     @import url('https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&display=swap');
 
     width: 100%;
-    height: 60px;
+    height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -171,7 +171,7 @@ export const DivBanner = styled.div`
 
     img{ 
         display: absolute;
-        top: 60px;
+        top: 70px;
         width: 1920px;
         height: 215px;
     }
@@ -250,7 +250,7 @@ export const MenuPersonal = styled.div`
  position: absolute;
  width: 25px;
  height: 25px;
- top: 60px;
+ top: 70px;
  right: 68px;
  background-color: #141414;
     opacity: 0;
@@ -262,10 +262,10 @@ export const HamburguerMenu = styled.div`
  position: absolute;
  width: 25px;
  height: 25px;
- top: 60px;
+ top: 70px;
  right: 0;
  background-color: #141414;
- transition: all 0.5s ease-in;
+ transition: all 0.4s ease-in;
  opacity: 0;
  z-index: 100;
  box-shadow: 0 10px 5px #141414;
