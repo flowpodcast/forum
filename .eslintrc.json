@@ -26,8 +26,9 @@
         "alphabetize": {
           "order": "asc",
           "ignoreCase": true
-        }
+				}
       }
-    ]
+		],
+		"linebreak-style": [0, "error", "windows"]
   }
 }
