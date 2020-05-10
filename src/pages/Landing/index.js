@@ -126,7 +126,7 @@ export default function Landing() {
         </div>
         <div className="group-infos">
             <aside className="infos"></aside>
-            <aside className="advertisement">advertisement</aside>
+            <aside className="advertisement"></aside>
         </div>
 
         </Chat>
