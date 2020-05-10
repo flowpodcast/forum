@@ -5,12 +5,9 @@ on:
     branches: [develop]
 
 jobs:
-	# This workflow contains a single job called "build"
   build:
     name: Build
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Yarn Installation
         run: |
@@ -32,7 +29,6 @@ jobs:
           path: build
   firebase-deploy:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@master
     - uses: actions/setup-node@master
