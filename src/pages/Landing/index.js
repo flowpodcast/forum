@@ -32,7 +32,7 @@ export default function Landing() {
         if (menuName === 'hamburguer') {
             const Menu = document.querySelector('.HamburguerMenu')
             Menu.style.opacity = '0'
-            Menu.style.top = '60px'
+            Menu.style.top = '70px'
             Menu.style.width = '25px'
             Menu.style.height = '100%'
         }
