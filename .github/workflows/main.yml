@@ -15,8 +15,8 @@ jobs:
           export PATH=~/.npm-global/bin:$PATH
           source ~/.profile
           npm install -g yarn
-      - name: Checkout Repo
-        uses: actions/checkout@develop
+      - name: Get Develop Repo
+        uses: actions/flowpodcast@develop
       - name: Install Dependencies
         run: yarn install
       - name: Build
@@ -27,9 +27,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@develop
+        uses: actions/flowpodcast@develop
       - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
+        uses: w9jds/flowpodcast@develop
         with:
           args: deploy --only hosting:forum
         env:
