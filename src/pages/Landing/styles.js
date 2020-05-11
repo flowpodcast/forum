@@ -13,6 +13,7 @@ img{
 display: absolute;
 top: 60px;
 width: 1920px;
+object-fit: cover;
 height: 215px;
 }
 
