@@ -1,59 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { AiFillStar } from 'react-icons/ai';
-import { BsSearch } from 'react-icons/bs';
-import { GiHamburgerMenu } from 'react-icons/gi';
-import { GoPencil } from 'react-icons/go';
-
-import { ReactComponent as Logo } from '../../assets/logo/FlowLogo.svg';
 import {
-  Header, MenuPersonal, HamburguerMenu,
-} from './styles';
+  Col,
+  Row,
+} from 'reactstrap';
+
+import './navbar.scss';
 
 function Navbar() {
-  const [hamburguerMenuIsOpen, setHamburguerMenuIsOpen] = useState(false);
-  const [personalMenuIsOpen, setPersonalMenuIsOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [alert, setAlert] = useState({
+    status: false,
+    message: '',
+    color: '',
+  });
+  const [user, setUser] = useState(null);
 
-  function handleHamburguerMenu() {
-    const details = document.getElementById('details');
-
-    if (details.open) details.open = false;
-    setPersonalMenuIsOpen(false);
-    setHamburguerMenuIsOpen(!hamburguerMenuIsOpen);
-  }
-
-  function handlePersonalMenu() {
-    setHamburguerMenuIsOpen(false);
-    setPersonalMenuIsOpen(!personalMenuIsOpen);
-  }
+  useEffect(() => {
+    if (user) {
+      setLoading(false);
+    } else {
+      setLoading(false);
+    }
+  }, [user]);
 
   return (
     <>
-      <Header>
-        <div>
-          <Logo className="logo" />
-        </div>
-        <input name="search" placeholder="Pesquisar..." />
-        <BsSearch className="search-ico" />
-        <hr />
-        <div className="container-menu">
-          <GoPencil className="pencil-ico" />
-          <figure />
-          <div className="personal-infos">
-            <span>GianlucaJux</span>
-            <div className="info-level">
-              <AiFillStar className="level-ico" />
-              <span>2250 KD</span>
-            </div>
+      <Row className="bg-secondary">
+        <Col xs="12">
+          <div className="p-3">
+            <svg height="180" width="180">
+              <polygon points="250,60 100,400 400,400" className="triangle" />
+                Sorry, your browser does not support inline SVG.
+            </svg>
           </div>
-          <details id="details" onClick={handlePersonalMenu}>
-            <summary />
-          </details>
-          <GiHamburgerMenu className="menu-ico" onClick={handleHamburguerMenu} />
-        </div>
-      </Header>
-      <MenuPersonal className="PersonalMenu" open={personalMenuIsOpen} />
-      <HamburguerMenu className="HamburguerMenu" open={hamburguerMenuIsOpen} />
+        </Col>
+      </Row>
     </>
   );
 }

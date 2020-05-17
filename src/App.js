@@ -3,8 +3,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
+import './index.scss';
+
 import LandingPage from './pages/Landing';
-import GlobalStyle from './styles/global';
 
 function App() {
   return (
@@ -12,7 +13,6 @@ function App() {
       <Container id="main" fluid>
         <Route exact path="/" component={LandingPage} />
       </Container>
-      <GlobalStyle />
     </Router>
   );
 }
