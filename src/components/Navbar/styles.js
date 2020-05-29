@@ -7,7 +7,7 @@ width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 100;
+  z-index: 98; // pro modal ser o segundo elemento mais a frente e o conteudo do modal ser o mais a frente.
   padding: 0 1rem;
 
   div{
@@ -65,7 +65,7 @@ width: 100%;
   .container-menu{
   width: auto;
   height: 100%;
-  z-index: 100;
+  z-index: 98;
   }
 
   figure{
@@ -83,7 +83,7 @@ width: 100%;
     outline: transparent;
     position: relative;
     right: 15px; 
-    z-index: 100;
+    z-index: 98;
   }
   
   details summary{
@@ -143,7 +143,7 @@ width: 100%;
     color: #fff;
     width: auto;
     height: 40px;
-    z-index: 100;
+    z-index: 98;
     padding: 0 2rem 0 1rem;
   }
 
@@ -169,7 +169,7 @@ export const MenuPersonal = styled.div`
   opacity: 0;
   transition: 0.5s;
   color:white;
-  z-index: 100;
+  z-index: 98;
 
   ${({ open }) => open && css`
     opacity: 1;
@@ -188,7 +188,7 @@ export const HamburguerMenu = styled.div`
   background-color: #141414;
   transition: all 0.5s ease-in;
   opacity: 0;
-  z-index: 100;
+  z-index: 98;
   box-shadow: 0 10px 5px #141414;
 
   ${({ open }) => open && css`
@@ -209,12 +209,13 @@ export const PostModal = styled.div`
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   opacity: 0;
-  transition: 0.5s;
+  transition: 0.2s;
   z-index: 1;
+  
 
   ${({ open }) => open && css`
     opacity: 1;
-	z-index: 100;
+	z-index: 99;
     //width: 350px;
     //height: 491px;
 	
@@ -222,7 +223,7 @@ export const PostModal = styled.div`
 `;
 
 export const PostModalContent = styled.div`
-  background-color: #fefefe;
+  background-color: #141414;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;

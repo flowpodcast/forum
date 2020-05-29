@@ -27,7 +27,8 @@ function Navbar() {
 	IMenuIsOpen(setPersonalMenuIsOpen, personalMenuIsOpen); 
   }
   
-  function handlePostModal() {
+  function handlePostModal(e) {
+	if(e.target.title=="ignore") return;
 	IMenuIsOpen(setPostModalIsOpen, postModalIsOpen);  
   }
   
@@ -69,9 +70,9 @@ function Navbar() {
 	  <span>Lorem Ipsum parabéns Gian vc tem 2250KD</span>
 	  </MenuPersonal>
       <HamburguerMenu className="HamburguerMenu" open={hamburguerMenuIsOpen} />
-	  <PostModal open={postModalIsOpen}>
-		<PostModalContent open={postModalIsOpen}>
-		
+	  <PostModal onClick={handlePostModal} open={postModalIsOpen}>
+		<PostModalContent onClick={handlePostModal.bind(this)} open={postModalIsOpen} title="ignore"> {
+		/*esse title ignore é um improviso, quem souber a solução real por favor implementar*/}
 		</PostModalContent>
 	  </PostModal>
     </>
