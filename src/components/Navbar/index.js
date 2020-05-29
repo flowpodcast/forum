@@ -5,11 +5,15 @@ import { BsSearch } from 'react-icons/bs';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GoPencil } from 'react-icons/go';
 import { FaTimesCircle } from 'react-icons/fa';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; 
+import {formats, toolbarOptions, historic, handleChange, post} from './Quill/config.js';
 
 import { ReactComponent as Logo } from '../../assets/logo/FlowLogo.svg';
 import {
   Header, MenuPersonal, HamburguerMenu, PostModal, PostModalContent,
 } from './styles';
+
 
 function Navbar() {
   const [hamburguerMenuIsOpen, setHamburguerMenuIsOpen] = useState(false);
@@ -40,6 +44,8 @@ function Navbar() {
 	setPostModalIsOpen(false);
 	menuToOpen(!originalState);
   }
+  
+
   
   return (
     <>
@@ -85,8 +91,8 @@ function Navbar() {
 		</h2>
 		
 		<br/>
-		<textarea>
-		</textarea>
+		<ReactQuill className="quillEditor" modules={{toolbar: toolbarOptions, history: historic}} formats={formats} theme="snow" value={post}
+                  onChange={handleChange} />
 		</PostModalContent>
 	  </PostModal>
     </>

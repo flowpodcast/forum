@@ -260,5 +260,12 @@ export const PostModalContent = styled.div`
   color: red;
 
   }
+  .quillEditor {
+  color: #141414;
+  height:70%;
+  }
+  .ql-snow {
+  background-color:white;
+  }
 `;
 
