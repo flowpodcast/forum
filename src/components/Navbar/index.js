@@ -21,7 +21,7 @@ function Navbar() {
 
     if (details.open) details.open = false;
     //setPersonalMenuIsOpen(false);
-	IMenuIsOpen(setPersonalMenuIsOpen); 
+	  IMenuIsOpen(setPersonalMenuIsOpen); 
     //setHamburguerMenuIsOpen(!hamburguerMenuIsOpen); 
   }
 
@@ -40,7 +40,7 @@ function Navbar() {
   //garantindo que apenas um menu seja aberto por vez.
   function IMenuIsOpen(menuToOpen) { //o argument menuToOpen deve ser a bool constante do menu que sera aberto e trocado pra true
 	setPersonalMenuIsOpen(false);
-    setHamburguerMenuIsOpen(false);
+        setHamburguerMenuIsOpen(false);
 	setCreatePostIsOpen(false);
 	menuToOpen(true);
   }
