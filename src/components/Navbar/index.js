@@ -28,7 +28,7 @@ function Navbar() {
   }
   
   function handlePostModal(e) {
-	if(e.target.title=="ignore") return;
+	if(e.target.id==="ignore") return;
 	IMenuIsOpen(setPostModalIsOpen, postModalIsOpen);  
   }
   
@@ -71,8 +71,21 @@ function Navbar() {
 	  </MenuPersonal>
       <HamburguerMenu className="HamburguerMenu" open={hamburguerMenuIsOpen} />
 	  <PostModal onClick={handlePostModal} open={postModalIsOpen}>
-		<PostModalContent onClick={handlePostModal.bind(this)} open={postModalIsOpen} title="ignore"> {
-		/*esse title ignore é um improviso, quem souber a solução real por favor implementar*/}
+		<PostModalContent className="PostModal" onClick={handlePostModal.bind(this)} open={postModalIsOpen} id="ignore"> {
+		/*esse id ignore é um improviso, quem souber a solução real por favor implementar
+		<Form>
+		  <Form.Group controlId="exampleForm.ControlTextarea1">
+			<Form.Label>Escreva seu Post.</Form.Label>
+			<Form.Control as="textarea" rows="3" />
+		  </Form.Group>
+		</Form>  
+		*/}
+		<h2 id="ignore">
+		Escreva seu Post.
+		</h2>
+		<br/>
+		<textarea id="ignore">
+		</textarea>
 		</PostModalContent>
 	  </PostModal>
     </>

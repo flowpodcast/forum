@@ -157,6 +157,7 @@ width: 100%;
     margin-top: 5px;
     width: 100%;
   }
+  
 `;
 
 export const MenuPersonal = styled.div`
@@ -200,6 +201,7 @@ export const HamburguerMenu = styled.div`
 
 export const PostModal = styled.div`
   position: fixed;
+  display: none;
   overflow: auto; /* Enable scroll if needed */
   padding-top: 100px; /* Location of the box */
   width: 100%; /* Full width */
@@ -216,6 +218,7 @@ export const PostModal = styled.div`
   ${({ open }) => open && css`
     opacity: 1;
 	z-index: 99;
+	display:initial;
     //width: 350px;
     //height: 491px;
 	
@@ -229,6 +232,7 @@ export const PostModalContent = styled.div`
   border: 1px solid #888;
   width: 80%;
   height: 80%;
+  color:white;
   opacity: 0;
   transition: 0.5s;
   z-index: 1;
@@ -240,5 +244,10 @@ export const PostModalContent = styled.div`
     //height: 491px;
 	
   `}
+    textarea {
+  width:100%;
+  height:90%;
+  font-size:20px;
+  }
 `;
 
