@@ -7,13 +7,13 @@ import { GoPencil } from 'react-icons/go';
 
 import { ReactComponent as Logo } from '../../assets/logo/FlowLogo.svg';
 import {
-  Header, MenuPersonal, HamburguerMenu,
+  Header, MenuPersonal, HamburguerMenu, PostModal, PostModalContent,
 } from './styles';
 
 function Navbar() {
   const [hamburguerMenuIsOpen, setHamburguerMenuIsOpen] = useState(false);
   const [personalMenuIsOpen, setPersonalMenuIsOpen] = useState(false);
-  const [createPostIsOpen, setCreatePostIsOpen] = useState(false);
+  const [postModalIsOpen, setPostModalIsOpen] = useState(false);
 
 
   function handleHamburguerMenu() {
@@ -27,8 +27,8 @@ function Navbar() {
 	IMenuIsOpen(setPersonalMenuIsOpen, personalMenuIsOpen); 
   }
   
-  function handleCreatePost() {
-	IMenuIsOpen(setCreatePostIsOpen, createPostIsOpen);  
+  function handlePostModal() {
+	IMenuIsOpen(setPostModalIsOpen, postModalIsOpen);  
   }
   
 
@@ -36,7 +36,7 @@ function Navbar() {
   // o param originalState é a bool antes de ser alterada, para verificar se um menu já esta aberto e precisa ser fechado
 	setPersonalMenuIsOpen(false);
 	setHamburguerMenuIsOpen(false);
-	setCreatePostIsOpen(false);
+	setPostModalIsOpen(false);
 	menuToOpen(!originalState);
   }
   
@@ -50,7 +50,7 @@ function Navbar() {
         <BsSearch className="search-ico" />
         <hr />
         <div className="container-menu">
-          <GoPencil className="pencil-ico" onClick={handleCreatePost} />
+          <GoPencil className="pencil-ico" onClick={handlePostModal} />
           <figure />
           <div className="personal-infos">
             <span>GianlucaJux</span>
@@ -65,8 +65,15 @@ function Navbar() {
           <GiHamburgerMenu className="menu-ico" onClick={handleHamburguerMenu} />
         </div>
       </Header>
-      <MenuPersonal className="PersonalMenu" open={personalMenuIsOpen} />
+      <MenuPersonal className="PersonalMenu" open={personalMenuIsOpen}>
+	  <span>Lorem Ipsum parabéns Gian vc tem 2250KD</span>
+	  </MenuPersonal>
       <HamburguerMenu className="HamburguerMenu" open={hamburguerMenuIsOpen} />
+	  <PostModal open={postModalIsOpen}>
+		<PostModalContent open={postModalIsOpen}>
+		
+		</PostModalContent>
+	  </PostModal>
     </>
   );
 }

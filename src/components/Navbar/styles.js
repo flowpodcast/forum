@@ -168,12 +168,14 @@ export const MenuPersonal = styled.div`
   background-color: #141414;
   opacity: 0;
   transition: 0.5s;
+  color:white;
   z-index: 100;
 
   ${({ open }) => open && css`
     opacity: 1;
     width: 350px;
     height: 491px;
+	
   `}
 `;
 
@@ -195,3 +197,47 @@ export const HamburguerMenu = styled.div`
     height: 100%;
   `}
 `;
+
+export const PostModal = styled.div`
+  position: fixed;
+  overflow: auto; /* Enable scroll if needed */
+  padding-top: 100px; /* Location of the box */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  left: 0;
+  top: 0;
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  opacity: 0;
+  transition: 0.5s;
+  z-index: 1;
+
+  ${({ open }) => open && css`
+    opacity: 1;
+	z-index: 100;
+    //width: 350px;
+    //height: 491px;
+	
+  `}
+`;
+
+export const PostModalContent = styled.div`
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 80%;
+  opacity: 0;
+  transition: 0.5s;
+  z-index: 1;
+
+  ${({ open }) => open && css`
+    opacity: 1;
+	z-index: 100;
+    //width: 350px;
+    //height: 491px;
+	
+  `}
+`;
+
