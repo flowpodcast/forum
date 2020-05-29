@@ -13,20 +13,38 @@ import {
 function Navbar() {
   const [hamburguerMenuIsOpen, setHamburguerMenuIsOpen] = useState(false);
   const [personalMenuIsOpen, setPersonalMenuIsOpen] = useState(false);
+  const [createPostIsOpen, setCreatePostIsOpen] = useState(false);
+
 
   function handleHamburguerMenu() {
     const details = document.getElementById('details');
 
     if (details.open) details.open = false;
-    setPersonalMenuIsOpen(false);
-    setHamburguerMenuIsOpen(!hamburguerMenuIsOpen);
+    //setPersonalMenuIsOpen(false);
+	IMenuIsOpen(setPersonalMenuIsOpen); 
+    //setHamburguerMenuIsOpen(!hamburguerMenuIsOpen); 
   }
 
   function handlePersonalMenu() {
-    setHamburguerMenuIsOpen(false);
-    setPersonalMenuIsOpen(!personalMenuIsOpen);
+    //setHamburguerMenuIsOpen(false);
+	IMenuIsOpen(setHamburguerMenuIsOpen); 
+    //setPersonalMenuIsOpen(!personalMenuIsOpen);
   }
-
+  
+  function handleCreatePost() {
+	IMenuIsOpen(setCreatePostIsOpen);  
+  }
+  
+  //essa função façade fecha todos os menus e por ultimo... 
+  //...abre o menu que o usuário clicar pelo handleXXXXMenu(o que tambem poderia ser um façade na minha opinião)
+  //garantindo que apenas um menu seja aberto por vez.
+  function IMenuIsOpen(menuToOpen) { //o argument menuToOpen deve ser a bool constante do menu que sera aberto e trocado pra true
+	setPersonalMenuIsOpen(false);
+    setHamburguerMenuIsOpen(false);
+	setCreatePostIsOpen(false);
+	menuToOpen(true);
+  }
+  
   return (
     <>
       <Header>
@@ -37,7 +55,7 @@ function Navbar() {
         <BsSearch className="search-ico" />
         <hr />
         <div className="container-menu">
-          <GoPencil className="pencil-ico" />
+          <GoPencil className="pencil-ico" onClick={handleCreatePost} />
           <figure />
           <div className="personal-infos">
             <span>GianlucaJux</span>
