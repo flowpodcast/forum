@@ -20,29 +20,24 @@ function Navbar() {
     const details = document.getElementById('details');
 
     if (details.open) details.open = false;
-    //setPersonalMenuIsOpen(false);
-	  IMenuIsOpen(setHamburguerMenuIsOpen); 
-    //setHamburguerMenuIsOpen(!hamburguerMenuIsOpen); 
+	IMenuIsOpen(setHamburguerMenuIsOpen, hamburguerMenuIsOpen); 
   }
 
   function handlePersonalMenu() {
-    //setHamburguerMenuIsOpen(false);
-	IMenuIsOpen(setPersonalMenuIsOpen); 
-    //setPersonalMenuIsOpen(!personalMenuIsOpen);
+	IMenuIsOpen(setPersonalMenuIsOpen, personalMenuIsOpen); 
   }
   
   function handleCreatePost() {
-	IMenuIsOpen(setCreatePostIsOpen);  
+	IMenuIsOpen(setCreatePostIsOpen, createPostIsOpen);  
   }
   
-  //essa função façade fecha todos os menus e por ultimo... 
-  //...abre o menu que o usuário clicar pelo handleXXXXMenu(o que tambem poderia ser um façade na minha opinião)
-  //garantindo que apenas um menu seja aberto por vez.
-  function IMenuIsOpen(menuToOpen) { //o argument menuToOpen deve ser a bool constante do menu que sera aberto e trocado pra true
+
+  function IMenuIsOpen(menuToOpen,originalState) { //o param menuToOpen deve ser a bool constante do menu que sera aberto e trocado pra true
+  // o param originalState é a bool antes de ser alterada, para verificar se um menu já esta aberto e precisa ser fechado
 	setPersonalMenuIsOpen(false);
-        setHamburguerMenuIsOpen(false);
+	setHamburguerMenuIsOpen(false);
 	setCreatePostIsOpen(false);
-	menuToOpen(true);
+	menuToOpen(!originalState);
   }
   
   return (
