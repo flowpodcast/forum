@@ -21,13 +21,13 @@ function Navbar() {
 
     if (details.open) details.open = false;
     //setPersonalMenuIsOpen(false);
-	  IMenuIsOpen(setPersonalMenuIsOpen); 
+	  IMenuIsOpen(setHamburguerMenuIsOpen); 
     //setHamburguerMenuIsOpen(!hamburguerMenuIsOpen); 
   }
 
   function handlePersonalMenu() {
     //setHamburguerMenuIsOpen(false);
-	IMenuIsOpen(setHamburguerMenuIsOpen); 
+	IMenuIsOpen(setPersonalMenuIsOpen); 
     //setPersonalMenuIsOpen(!personalMenuIsOpen);
   }
   
