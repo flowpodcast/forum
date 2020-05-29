@@ -7,7 +7,7 @@ width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 100;
+  z-index: 98; // pro modal ser o segundo elemento mais a frente e o conteudo do modal ser o mais a frente.
   padding: 0 1rem;
 
   div{
@@ -65,7 +65,7 @@ width: 100%;
   .container-menu{
   width: auto;
   height: 100%;
-  z-index: 100;
+  z-index: 98;
   }
 
   figure{
@@ -83,7 +83,7 @@ width: 100%;
     outline: transparent;
     position: relative;
     right: 15px; 
-    z-index: 100;
+    z-index: 98;
   }
   
   details summary{
@@ -104,6 +104,7 @@ width: 100%;
   color: #C09235;
 
   }
+
 
   hr{
   width: 1px;
@@ -143,7 +144,7 @@ width: 100%;
     color: #fff;
     width: auto;
     height: 40px;
-    z-index: 100;
+    z-index: 98;
     padding: 0 2rem 0 1rem;
   }
 
@@ -157,6 +158,7 @@ width: 100%;
     margin-top: 5px;
     width: 100%;
   }
+  
 `;
 
 export const MenuPersonal = styled.div`
@@ -168,12 +170,14 @@ export const MenuPersonal = styled.div`
   background-color: #141414;
   opacity: 0;
   transition: 0.5s;
-  z-index: 100;
+  color:white;
+  z-index: 98;
 
   ${({ open }) => open && css`
     opacity: 1;
     width: 350px;
     height: 491px;
+	
   `}
 `;
 
@@ -186,7 +190,7 @@ export const HamburguerMenu = styled.div`
   background-color: #141414;
   transition: all 0.5s ease-in;
   opacity: 0;
-  z-index: 100;
+  z-index: 98;
   box-shadow: 0 10px 5px #141414;
 
   ${({ open }) => open && css`
@@ -195,3 +199,73 @@ export const HamburguerMenu = styled.div`
     height: 100%;
   `}
 `;
+
+export const PostModal = styled.div`
+  position: fixed;
+  display: none;
+  overflow: auto; /* Enable scroll if needed */
+  padding-top: 100px; /* Location of the box */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  left: 0;
+  top: 0;
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  opacity: 0;
+  transition: 0.2s;
+  z-index: 1;
+  
+
+  ${({ open }) => open && css`
+    opacity: 1;
+	z-index: 99;
+	display:initial;
+    //width: 350px;
+    //height: 491px;
+	
+  `}
+`;
+
+export const PostModalContent = styled.div`
+  background-color: #141414;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 600px;
+  height: 500px;
+  color:white;
+  opacity: 0;
+  transition: 0.5s;
+  z-index: 1;
+
+  ${({ open }) => open && css`
+    opacity: 1;
+	z-index: 100;
+    //width: 350px;
+    //height: 491px;
+	
+  `}
+    textarea {
+  width:100%;
+  height:90%;
+  font-size:20px;
+  }
+      .close-ico{
+  cursor: pointer;
+  transition: .5s;
+  
+  margin-left:57%;
+  }
+  .close-ico:hover{
+  color: red;
+
+  }
+  .quillEditor {
+  color: #141414;
+  height:70%;
+  }
+  .ql-snow {
+  background-color:white;
+  }
+`;
+
