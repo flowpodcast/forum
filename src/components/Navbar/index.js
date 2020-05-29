@@ -4,6 +4,7 @@ import { AiFillStar } from 'react-icons/ai';
 import { BsSearch } from 'react-icons/bs';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GoPencil } from 'react-icons/go';
+import { FaTimesCircle } from 'react-icons/fa';
 
 import { ReactComponent as Logo } from '../../assets/logo/FlowLogo.svg';
 import {
@@ -28,7 +29,6 @@ function Navbar() {
   }
   
   function handlePostModal(e) {
-	if(e.target.id==="ignore") return;
 	IMenuIsOpen(setPostModalIsOpen, postModalIsOpen);  
   }
   
@@ -70,9 +70,9 @@ function Navbar() {
 	  <span>Lorem Ipsum parabéns Gian vc tem 2250KD</span>
 	  </MenuPersonal>
       <HamburguerMenu className="HamburguerMenu" open={hamburguerMenuIsOpen} />
-	  <PostModal onClick={handlePostModal} open={postModalIsOpen}>
-		<PostModalContent className="PostModal" onClick={handlePostModal.bind(this)} open={postModalIsOpen} id="ignore"> {
-		/*esse id ignore é um improviso, quem souber a solução real por favor implementar
+	  <PostModal open={postModalIsOpen}>
+		<PostModalContent className="PostModal" open={postModalIsOpen}> 
+	    {/*
 		<Form>
 		  <Form.Group controlId="exampleForm.ControlTextarea1">
 			<Form.Label>Escreva seu Post.</Form.Label>
@@ -80,11 +80,12 @@ function Navbar() {
 		  </Form.Group>
 		</Form>  
 		*/}
-		<h2 id="ignore">
-		Escreva seu Post.
+		<h2>
+		Escreva seu Post. <FaTimesCircle className="close-ico" onClick={handlePostModal} />
 		</h2>
+		
 		<br/>
-		<textarea id="ignore">
+		<textarea>
 		</textarea>
 		</PostModalContent>
 	  </PostModal>
