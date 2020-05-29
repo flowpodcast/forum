@@ -1,5 +1,4 @@
   //so pra nao ficar botando as opcoes do quill tudo enfiado no index.js
-  import ReactQuill from 'react-quill'; //quebrei o DRY
   export const formats = [
 			'font','size',
             'bold', 'italic', 'underline',
