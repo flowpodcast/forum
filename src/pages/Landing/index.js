@@ -9,7 +9,7 @@ import {
 } from './styles';
 
 export default function Landing() {
-//loadForum(); 
+loadForum();
 return (
 	 <>
       <Navbar />
