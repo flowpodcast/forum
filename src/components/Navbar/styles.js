@@ -260,6 +260,15 @@ export const PostModalContent = styled.div`
   color: red;
 
   }
+        .upload-ico{
+  cursor: pointer;
+  transition: .5s;
+  margin-top:8%;
+  }
+  .upload-ico:hover{
+  color: green;
+
+  }
   .quillEditor {
   color: #141414;
   height:70%;

@@ -5,9 +5,10 @@ import { BsSearch } from 'react-icons/bs';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GoPencil } from 'react-icons/go';
 import { FaTimesCircle } from 'react-icons/fa';
+import { FaFileImport } from 'react-icons/fa'; 
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
-import {formats, toolbarOptions, historic, handleChange, post} from '../../Quill/config.js';
+import {formats, toolbarOptions, historic, handleChange, handleTitleChange, postarNoForum} from '../../Quill/config.js';
 
 import { ReactComponent as Logo } from '../../assets/logo/FlowLogo.svg';
 import {
@@ -44,9 +45,12 @@ function Navbar() {
 	setPostModalIsOpen(false);
 	menuToOpen(!originalState);
   }
-  
+  const [userInput, setUserInput] = useState('');
 
-  
+ function inputchangehandler(event) {
+    setUserInput(event.target.value);
+	handleTitleChange(event.target.value);
+  }
   return (
     <>
       <Header>
@@ -91,9 +95,14 @@ function Navbar() {
 		</h2>
 		
 		<br/>
-		<ReactQuill className="quillEditor" modules={{toolbar: toolbarOptions, history: historic}} formats={formats} theme="snow" value={post}
+		<input type="text" placeholder="titulo" value={userInput} onChange={inputchangehandler}></input>
+		<ReactQuill className="quillEditor" modules={{toolbar: toolbarOptions, history: historic}} formats={formats} theme="snow" value={''}
                   onChange={handleChange} />
+				  <br/>
+		<h2 className="upload-ico" onClick={postarNoForum}>Enviar <FaFileImport /></h2>
 		</PostModalContent>
+		
+		
 	  </PostModal>
     </>
   );

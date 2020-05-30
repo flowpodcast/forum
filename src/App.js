@@ -12,7 +12,7 @@ function App() {
     <Router>
       <Container id="main" fluid>
         <Route exact path="/" component={LandingPage} />
-		<Route exact path="/teste" component={Posts} />
+		<Route path="/Posts/:titulo" component={Posts} />
       </Container>
       <GlobalStyle />
     </Router>

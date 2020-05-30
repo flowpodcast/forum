@@ -140,4 +140,9 @@ height: 50%;
 border-radius: 10px;
 background-color: #696969
 }
+.post{
+background-color:white;
+margin: auto;
+height:328px;
+}
 `;
