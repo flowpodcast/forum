@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 
 import { AiFillStar } from 'react-icons/ai';
 import { BsSearch } from 'react-icons/bs';
+import { FaTimesCircle } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GoPencil } from 'react-icons/go';
-import { FaTimesCircle } from 'react-icons/fa';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; 
-import {formats, toolbarOptions, historic, handleChange, post} from './Quill/config.js';
 
+import 'react-quill/dist/quill.snow.css';
 import { ReactComponent as Logo } from '../../assets/logo/FlowLogo.svg';
+import {
+  formats, toolbarOptions, historic, handleChange, post,
+} from './quill/config';
 import {
   Header, MenuPersonal, HamburguerMenu, PostModal, PostModalContent,
 } from './styles';
@@ -25,28 +27,27 @@ function Navbar() {
     const details = document.getElementById('details');
 
     if (details.open) details.open = false;
-	IMenuIsOpen(setHamburguerMenuIsOpen, hamburguerMenuIsOpen); 
+    IMenuIsOpen(setHamburguerMenuIsOpen, hamburguerMenuIsOpen);
   }
 
   function handlePersonalMenu() {
-	IMenuIsOpen(setPersonalMenuIsOpen, personalMenuIsOpen); 
+    IMenuIsOpen(setPersonalMenuIsOpen, personalMenuIsOpen);
   }
-  
+
   function handlePostModal(e) {
-	IMenuIsOpen(setPostModalIsOpen, postModalIsOpen);  
+    IMenuIsOpen(setPostModalIsOpen, postModalIsOpen);
   }
-  
 
-  function IMenuIsOpen(menuToOpen,originalState) { //o param menuToOpen deve ser a bool constante do menu que sera aberto e trocado pra true
-  // o param originalState é a bool antes de ser alterada, para verificar se um menu já esta aberto e precisa ser fechado
-	setPersonalMenuIsOpen(false);
-	setHamburguerMenuIsOpen(false);
-	setPostModalIsOpen(false);
-	menuToOpen(!originalState);
+
+  function IMenuIsOpen(menuToOpen, originalState) { // o param menuToOpen deve ser a bool constante do menu que sera aberto e trocado pra true
+    // o param originalState é a bool antes de ser alterada, para verificar se um menu já esta aberto e precisa ser fechado
+    setPersonalMenuIsOpen(false);
+    setHamburguerMenuIsOpen(false);
+    setPostModalIsOpen(false);
+    menuToOpen(!originalState);
   }
-  
 
-  
+
   return (
     <>
       <Header>
@@ -73,28 +74,36 @@ function Navbar() {
         </div>
       </Header>
       <MenuPersonal className="PersonalMenu" open={personalMenuIsOpen}>
-	  <span>Lorem Ipsum parabéns Gian vc tem 2250KD</span>
-	  </MenuPersonal>
+        <span>Lorem Ipsum parabéns Gian vc tem 2250KD</span>
+      </MenuPersonal>
       <HamburguerMenu className="HamburguerMenu" open={hamburguerMenuIsOpen} />
-	  <PostModal open={postModalIsOpen}>
-		<PostModalContent className="PostModal" open={postModalIsOpen}> 
-	    {/*
+      <PostModal open={postModalIsOpen}>
+        <PostModalContent className="PostModal" open={postModalIsOpen}>
+          {/*
 		<Form>
 		  <Form.Group controlId="exampleForm.ControlTextarea1">
 			<Form.Label>Escreva seu Post.</Form.Label>
 			<Form.Control as="textarea" rows="3" />
 		  </Form.Group>
-		</Form>  
+		</Form>
 		*/}
-		<h2>
-		Escreva seu Post. <FaTimesCircle className="close-ico" onClick={handlePostModal} />
-		</h2>
-		
-		<br/>
-		<ReactQuill className="quillEditor" modules={{toolbar: toolbarOptions, history: historic}} formats={formats} theme="snow" value={post}
-                  onChange={handleChange} />
-		</PostModalContent>
-	  </PostModal>
+          <h2>
+            Escreva seu Post.
+            {' '}
+            <FaTimesCircle className="close-ico" onClick={handlePostModal} />
+          </h2>
+
+          <br />
+          <ReactQuill
+            className="quillEditor"
+            modules={{ toolbar: toolbarOptions, history: historic }}
+            formats={formats}
+            theme="snow"
+            value={post}
+            onChange={handleChange}
+          />
+        </PostModalContent>
+      </PostModal>
     </>
   );
 }
