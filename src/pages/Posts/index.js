@@ -11,8 +11,7 @@ import {
 
 export default function Posts() {
 var location = useLocation();
-console.log(location.pathname.split('/')[2],location.pathname.split('/')[3]);
-loadPost(location.pathname.split('/')[2],location.pathname.split('/')[3]); //chama um post especifico, essa pagina nao deve abrir se o usuario acessar um perfil
+loadPost(location.pathname.split('/')[2]); //chama um post especifico, essa pagina nao deve abrir se o usuario acessar um perfil
 return (
 	 <>
       <Navbar />
@@ -28,7 +27,7 @@ return (
         <div className="group-container">
 		<div className="groups">
 		<center>
-          <div dangerouslySetInnerHTML={{__html: global.Posts.post}} className="post">
+          <div dangerouslySetInnerHTML={{__html: global.PostsList['selectedPost'].post}} className="post">
 		  </div>
 		</center>
 		</div>

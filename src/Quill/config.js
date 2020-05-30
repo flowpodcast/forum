@@ -29,37 +29,37 @@
     title = value;
   }	  
   var xhr = new XMLHttpRequest();
-  const firebaseURL = "https://flowrumpodcast.firebaseio.com/"; //realtime database
+  const firebaseURL = "{URL DE UM REALTIME DATABASE DO FIREBASE COM REGRAS DE DEBUG}"; //realtime database
   var enc = new TextDecoder("utf-8"); //decodificar os posts recebidos como array
   export const postarNoForum = function() {
-  
-	xhr.open('PUT', firebaseURL+'GianlucaJux/'+'/.json');
-    var postJSON = {};
-	postJSON[title] = {post : ''};
-	postJSON[title].post=post;
+	  
+    var postID=Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
+	xhr.open('PATCH', firebaseURL+'Posts/'+postID+'/.json');
+    var postJSON = { post : '', title: '', user: '', id : postID};
+	postJSON = {post : ''};
+	postJSON.post = post;
+	postJSON.title = title;
+	postJSON.user = "GianlucaJux" //identificar user dps...
 	xhr.send(JSON.stringify(postJSON));
   }
-  global.Posts = { post : ''};
+  
   global.PostsList = [];
-  export const loadPost = function(user, titulo) { 
-    xhr.open("GET", firebaseURL+user+'/'+titulo+'/.json', false); //pegar nome do user dps.
-	//xhr.responseType = "arraybuffer";
+  export const loadPost = function(id) { 
+    xhr.open("GET", firebaseURL+'Posts/'+id+'/.json', false);
 	xhr.onload = function(e) {
-    //var arraybuffer = xhr.response; // não é responseText
-	console.log(JSON.parse(xhr.responseText));
-	global.Posts.post = JSON.parse(xhr.responseText).post;//pega um post especifico
+	//console.log(JSON.parse(xhr.responseText));
+	global.PostsList['selectedPost'] = JSON.parse(xhr.responseText);//pega um post especifico baseado no id na URL e salva numa variavel global que representa o post aberto(nao sei se da conflito com varios usuarios ao mesmo tempo)
     
 	}
 	xhr.send();
   }
+  
   export const loadForum = function() { //carrega todos os posts(que serao futuramente os mais recentes/populares)
   
-  xhr.open("GET", firebaseURL+'/.json',false);
+  xhr.open("GET", firebaseURL+'Posts'+'/.json',false);
   xhr.onload = function(e) {
-    //var arraybuffer = xhr.response; // não é responseText
 	var json = JSON.parse(xhr.responseText);
-	global.PostsList = Object.keys(json).map(i => json );//pega um post especifico
-	console.log(global.PostsList);
+	global.PostsList = json; //coloca todos os posts na raiz do banco; numa variavel global.
 	}
 	xhr.send();
   }

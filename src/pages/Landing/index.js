@@ -25,12 +25,13 @@ return (
         <div className="group-container">
           <div className="search-groups" />	  
           <div id="posts" className="groups">
-	      {global.PostsList.map((item) =>
-		  <li>{item[0].toString()}</li>
-            
-          )}
-		  </div>
-			
+		  {Object.values(global.PostsList).map(Post =>
+		  <>
+		  <a href={`/Posts/${Post.postID}`}>{Post.title}</a>
+		  <br/>
+		  </>
+		  )}
+		  </div> 
         </div>
         <div className="group-infos">
           <aside className="infos" />
