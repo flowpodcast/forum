@@ -7,7 +7,7 @@ import { GoPencil } from 'react-icons/go';
 import { FaTimesCircle } from 'react-icons/fa';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
-import {formats, toolbarOptions, historic, handleChange, post} from './Quill/config.js';
+import {formats, toolbarOptions, historic, handleChange, post} from '../../Quill/config.js';
 
 import { ReactComponent as Logo } from '../../assets/logo/FlowLogo.svg';
 import {
