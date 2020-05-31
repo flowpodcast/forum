@@ -31,16 +31,17 @@
     title = value;
   }	  
   var xhr = new XMLHttpRequest();
-  const firebaseURL = "{URL DE UM REALTIME DATABASE DO FIREBASE COM REGRAS DE DEBUG}"; //realtime database
+  const firebaseURL = {URL DE UM REALTIME DATABASE DO FIREBASE COM REGRAS DE DEBUG}; //realtime database
   var enc = new TextDecoder("utf-8"); //decodificar os posts recebidos como array
   export const postarNoForum = function() {
 	  
     var postID=Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
 	xhr.open('PATCH', firebaseURL+'Posts/'+postID+'/.json');
-    var postJSON = { post : '', title: '', user: '', id : postID};
+    var postJSON = { post : '', title: '', user: '', id : ''};
 	postJSON = {post : ''};
 	postJSON.post = post;
 	postJSON.title = title;
+	postJSON.id= postID;
 	postJSON.user = "GianlucaJux" //identificar user dps...
 	xhr.send(JSON.stringify(postJSON));
   }
