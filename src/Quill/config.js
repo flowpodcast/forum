@@ -20,6 +20,8 @@
             maxStack: 500,
             userOnly: true
         };
+		
+  // daqui para baixo poderia ser outro arquivo...
   var post = '' ;
   var title = '' ;
   export const handleChange = function(value){
