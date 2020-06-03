@@ -1,14 +1,25 @@
 {
   "projects": {
-    "default": "flowpodcast"
+    "default": "flowpodcast",
+    "testeflowrum": "flowrumpodcast"
   },
-	"targets": {
-		"flowpodcast": {
-			"hosting": {
-				"forum": [
-					"flowrum"
-				]
-			}
-		}
-	}
+  "targets": {
+    "flowpodcast": {
+      "hosting": {
+        "forum": [
+          "flowrum"
+        ]
+      }
+    },
+    "flowrumpodcast": {
+      "hosting": {
+        "flowrumpodcast": [
+          "forum"
+        ],
+        "forum": [
+          "flowrumpodcast"
+        ]
+      }
+    }
+  }
 }

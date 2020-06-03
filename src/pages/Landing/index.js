@@ -1,5 +1,6 @@
 import React from 'react';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Alert } from 'reactstrap';
 import Banner from '../../assets/imgs/BannerFlow.png';
 import Navbar from '../../components/Navbar';
 import {loadForum} from '../../Quill/config.js';
@@ -9,7 +10,6 @@ import {
 } from './styles';
 
 export default function Landing() {
-loadForum();
 return (
 	 <>
       <Navbar />
@@ -25,12 +25,7 @@ return (
         <div className="group-container">
           <div className="search-groups" />	  
           <div id="posts" className="groups">
-		  {Object.values(global.PostsList).map(Post =>
-		  <>
-		  <a href={`/Posts/${Post.postID}`}>{Post.title}</a>
-		  <br/>
-		  </>
-		  )}
+		<ListaDePosts/>
 		  </div> 
         </div>
         <div className="group-infos">
@@ -43,4 +38,23 @@ return (
     </>
 
   );
+}
+
+function ListaDePosts () {
+	loadForum();
+	if(global.PostsList !== undefined) {
+	return (
+	Object.values(global.PostsList).map(Post =>
+		  <>
+		  <center>
+		  <Alert color="Dark">
+		  <a href={`/Posts/${Post.postID}`} className="alert-link">{Post.title}</a>
+		  </Alert>
+		  <br/>
+		  </center>
+		  </>
+		  ));
+		 
+	}
+	return ( <h1>Nada aqui...</h1>);
 }

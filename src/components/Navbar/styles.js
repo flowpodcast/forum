@@ -183,6 +183,7 @@ export const MenuPersonal = styled.div`
 
 export const HamburguerMenu = styled.div`
   position: absolute;
+  color:white;
   width: 25px;
   height: 25px;
   top: 60px;
@@ -254,7 +255,7 @@ export const PostModalContent = styled.div`
   cursor: pointer;
   transition: .5s;
   
-  margin-left:57%;
+  margin-left:40%;
   }
   .close-ico:hover{
   color: red;
@@ -263,7 +264,7 @@ export const PostModalContent = styled.div`
         .upload-ico{
   cursor: pointer;
   transition: .5s;
-  margin-top:8%;
+  margin-top:47px;
   }
   .upload-ico:hover{
   color: green;

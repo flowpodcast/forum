@@ -120,7 +120,6 @@ min-height: 100%;
 padding-top: 13px;
 padding-right: 13px;
 
-
 }
 
 .infos{

@@ -12,9 +12,43 @@ import {formats, toolbarOptions, historic, handleChange, handleTitleChange, post
 
 import { ReactComponent as Logo } from '../../assets/logo/FlowLogo.svg';
 import {
-  Header, MenuPersonal, HamburguerMenu, PostModal, PostModalContent,
+  Header, MenuPersonal, HamburguerMenu, PostModal, PostModalContent, EstiloResponsividade
 } from './styles';
 
+function HamburguerMenuContent() { //isso aqui podia ser um novo arquivo com todos os "contents" ---------------------
+return ( 
+<>
+<center> {/*me julgue, o margin auto não foi.*/}
+	<h2>
+		<a href="">Cadastro</a>
+	</h2>
+</center>
+</>
+);
+}
+
+var loggedIn = false;
+
+function UserDisplay (){
+if(loggedIn)	{
+	return (	
+	<>
+	<figure/>
+	<div className="personal-infos">
+			<span>GianlucaJux</span>
+		<div className="info-level">
+			<AiFillStar className="level-ico" />
+			<span>2250 KD</span>
+		</div>
+	</div>
+	{/*o details e a setinha não estão aqui por causa de um problema de arquitetura, como tudo isso não está sendo renderizado por uma classe, não tem como eu colocar o details antes do handlePersonalMenu ser definido */}
+	</>
+	);
+}
+return ( <a href="">Fazer Login </a> );
+}
+
+//----------------------------------------------------------------------
 
 function Navbar() {
   const [hamburguerMenuIsOpen, setHamburguerMenuIsOpen] = useState(false);
@@ -51,6 +85,36 @@ function Navbar() {
     setUserInput(event.target.value);
 	handleTitleChange(event.target.value);
   }
+  
+  function IPostarNoForum () {
+  postarNoForum();
+  IMenuIsOpen(setPostModalIsOpen, postModalIsOpen);
+  window.location.reload(false); //mudar pra so dar refresh se ele estiver na lista de posts
+  }
+	  
+  function UserDetails () {
+	if(loggedIn)
+	{
+		return (
+		<>  
+		<details id="details" onClick={handlePersonalMenu}>
+				<summary />
+		</details>
+		</>
+		);
+	}
+	else
+	{
+		return (
+		<>  
+		<details id="details" style={{display:"none"}} onClick={handlePersonalMenu}>
+				<summary />
+		</details>
+		</>
+		);
+	}
+  }	  
+	  
   return (
     <>
       <Header>
@@ -62,24 +126,17 @@ function Navbar() {
         <hr />
         <div className="container-menu">
           <GoPencil className="pencil-ico" onClick={handlePostModal} />
-          <figure />
-          <div className="personal-infos">
-            <span>GianlucaJux</span>
-            <div className="info-level">
-              <AiFillStar className="level-ico" />
-              <span>2250 KD</span>
-            </div>
-          </div>
-          <details id="details" onClick={handlePersonalMenu}>
-            <summary />
-          </details>
+          <UserDisplay />
+		  <UserDetails/>
           <GiHamburgerMenu className="menu-ico" onClick={handleHamburguerMenu} />
         </div>
       </Header>
       <MenuPersonal className="PersonalMenu" open={personalMenuIsOpen}>
 	  <span>Lorem Ipsum parabéns Gian vc tem 2250KD</span>
 	  </MenuPersonal>
-      <HamburguerMenu className="HamburguerMenu" open={hamburguerMenuIsOpen} />
+      <HamburguerMenu className="HamburguerMenu" open={hamburguerMenuIsOpen}>
+	  <HamburguerMenuContent/>
+	  </HamburguerMenu>
 	  <PostModal open={postModalIsOpen}>
 		<PostModalContent className="PostModal" open={postModalIsOpen}> 
 	    {/*
@@ -94,12 +151,10 @@ function Navbar() {
 		Escreva seu Post. <FaTimesCircle className="close-ico" onClick={handlePostModal} />
 		</h2>
 		
-		<br/>
-		<input type="text" placeholder="titulo" value={userInput} onChange={inputchangehandler}></input>
+		<input type="text" style={{fontSize:"20px", marginTop:"-30px"}} placeholder="titulo" value={userInput} onChange={inputchangehandler}></input>
 		<ReactQuill className="quillEditor" modules={{toolbar: toolbarOptions, history: historic}} formats={formats} theme="snow" value={''}
                   onChange={handleChange} />
-				  <br/>
-		<h2 className="upload-ico" onClick={postarNoForum}>Enviar <FaFileImport /></h2>
+		<h4 className="upload-ico" onClick={IPostarNoForum}>Enviar <FaFileImport /></h4>
 		</PostModalContent>
 		
 		

@@ -12,6 +12,12 @@ import {
 export default function Posts() {
 var location = useLocation();
 loadPost(location.pathname.split('/')[2]); //chama um post especifico, essa pagina nao deve abrir se o usuario acessar um perfil
+if(global.PostsList['selectedPost'].post===undefined)
+{
+	return (<> <h1>Erro: Post não existe.</h1> </>);
+}
+else
+{
 return (
 	 <>
       <Navbar />
@@ -41,4 +47,5 @@ return (
     </>
 
   );
+}
 }
