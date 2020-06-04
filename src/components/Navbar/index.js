@@ -20,7 +20,7 @@ return (
 <>
 <center> {/*me julgue, o margin auto não foi.*/}
 	<h2>
-		<a href="">Cadastro</a>
+		<a href="Cadastro">Cadastro</a>
 	</h2>
 </center>
 </>

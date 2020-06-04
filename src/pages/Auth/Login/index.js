@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Banner from '../../assets/imgs/BannerFlow.png';
+import Banner from 'assets/imgs/BannerFlow.png';
 import {useLocation} from "react-router-dom";
-import { ReactComponent as Logo } from '../../assets/logo/FlowLogo.svg';
-import {Header} from '../../components/Navbar/styles';
-import {DivBanner} from '../Landing/styles'
+import { ReactComponent as Logo } from 'assets/logo/FlowLogo.svg';
+import {Header} from 'components/Navbar/styles';
+import {DivBanner} from 'pages/Landing/styles';
 
 export default function Login() {
   return (
@@ -18,6 +18,7 @@ export default function Login() {
 	  <DivBanner>
         <img src={Banner} alt="Flow Podcast" />
       </DivBanner>
+	  {/*Auth.user*/}
     </>
   );
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Banner from '../../assets/imgs/BannerFlow.png';
-import Navbar from '../../components/Navbar';
-import {loadPost} from '../../Quill/config.js';
+import Banner from 'assets/imgs/BannerFlow.png';
+import Navbar from 'components/Navbar';
+import {loadPost} from 'Quill/config.js';
 import {useLocation} from "react-router-dom";
 import {
   DivBanner,

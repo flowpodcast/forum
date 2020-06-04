@@ -1,9 +1,9 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Alert } from 'reactstrap';
-import Banner from '../../assets/imgs/BannerFlow.png';
-import Navbar from '../../components/Navbar';
-import {loadForum} from '../../Quill/config.js';
+import Banner from 'assets/imgs/BannerFlow.png';
+import Navbar from 'components/Navbar';
+import {loadForum} from 'Quill/config.js';
 import {
   DivBanner,
   Chat,
