@@ -20,7 +20,7 @@ return (
 <>
 <center> {/*me julgue, o margin auto não foi.*/}
 	<h2>
-		<a href="Cadastro">Cadastro</a>
+		<a href="/Cadastro">Cadastro</a>
 	</h2>
 </center>
 </>
@@ -45,7 +45,7 @@ if(loggedIn)	{
 	</>
 	);
 }
-return ( <a href="">Fazer Login </a> );
+return ( <a href="/Login">Fazer Login </a> );
 }
 
 //----------------------------------------------------------------------
