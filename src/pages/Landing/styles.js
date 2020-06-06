@@ -139,4 +139,14 @@ height: 50%;
 border-radius: 10px;
 background-color: #696969
 }
+
+.hoverToGray {
+margin-bottom: 0.1rem;
+transition: 0.5s;
+background-color:black;
+}
+.hoverToGray:hover {
+cursor: pointer;
+background-color:gray;
+}
 `;

@@ -40,17 +40,23 @@ return (
   );
 }
 
+function openPost(postID) {
+	window.location.href = `/Posts/${postID}`;
+}	
+
 function ListaDePosts () {
 	loadForum();
+
 	if(global.PostsList !== undefined) {
 	return (
 	Object.values(global.PostsList).map(Post =>
+	
 		  <>
 		  <center>
-		  <Alert color="Dark">
-		  <a href={`/Posts/${Post.postID}`} className="alert-link">{Post.title} | {Post.user}</a>
+		  <Alert className="hoverToGray" onClick={() => openPost(Post.postID)} color="Dark">
+		  <a href="#" style={{textDecoration : "none"}} className="alert-link">{Post.title}</a>
+		  <p style={{float: "right", display: "inline-block", color : "white"}}>| {Post.user} ({Post.date})</p>
 		  </Alert>
-		  <br/>
 		  </center>
 		  </>
 		  ));
