@@ -31,10 +31,10 @@
     title = value;
   }	  
   var xhr = new XMLHttpRequest();
-  const firebaseURL = 'https://flowrumpodcast.firebaseio.com/'; //realtime database
+  const firebaseURL = '{URL-DO-REALTIME-DATABASE}'; //realtime database
   var enc = new TextDecoder("utf-8"); //decodificar os posts recebidos como array
   export const postarNoForum = function() {
-	  
+	var userObject = JSON.parse(localStorage.getItem( 'userObject' )); // não precisa conferir nada aqui porque é impossivel acessar isso sem estar logado	
     var postID=Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
 	xhr.open('PATCH', firebaseURL+'Posts/'+postID+'/.json');
     var postJSON = { post : '', title: '', user: '', postID : ''};
@@ -42,7 +42,7 @@
 	postJSON.post = post;
 	postJSON.title = title;
 	postJSON.postID= postID;
-	postJSON.user = "GianlucaJux" //identificar user dps...
+	postJSON.user = userObject.displayName; //identificar user dps...
 	xhr.send(JSON.stringify(postJSON));
   }
   

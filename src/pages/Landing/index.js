@@ -48,7 +48,7 @@ function ListaDePosts () {
 		  <>
 		  <center>
 		  <Alert color="Dark">
-		  <a href={`/Posts/${Post.postID}`} className="alert-link">{Post.title}</a>
+		  <a href={`/Posts/${Post.postID}`} className="alert-link">{Post.title} | {Post.user}</a>
 		  </Alert>
 		  <br/>
 		  </center>
