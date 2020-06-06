@@ -7,9 +7,13 @@ import {Header} from 'components/Navbar/styles';
 import {DivBanner} from 'pages/Landing/styles';
 import {config} from 'firebaseConfig';
 
+
+
 export default function Login() {
-	global.Auth = {};
-	global.Auth.User="nao fez login";
+	var userObject = {};
+    userObject.loggedIn=false;
+	//global.Auth = {};
+	//global.Auth.User="nao fez login";
 	const [emailInput, setEmailInput] = useState('');
 	const [passInput, setPassInput] = useState('');
 	function passInputChange (event) {
@@ -31,17 +35,30 @@ export default function Login() {
 		postJSON.returnSecureToken = true;
 		xhr.send(JSON.stringify(postJSON));
 		xhr.onload = function(e) {
+		userObject = JSON.parse(xhr.responseText);
+		localStorage.setItem('userObject',JSON.stringify(userObject));
 		alert(xhr.responseText);//criar mensagens de erro
-		document.getElementById('User').innerHTML=JSON.parse(xhr.responseText).displayName;
+		window.location.reload(false);
 		}
 		
+	}
+	
+	function User(){
+	var userObject = JSON.parse(localStorage.getItem( 'userObject' )) || "";
+	if(userObject.displayName!=null)
+	{
+		window.location.href = "/";
+	}
+	return (
+	<h2 style={{color:"white"}} id="User">{userObject.displayName}</h2>
+	);
 	}
 	
   return (
     <>
       <Header>
         <div>
-          <Logo className="logo" />
+          <a href="/"><Logo className="logo" /></a>
         </div>
         <hr />
       </Header>
@@ -54,8 +71,10 @@ export default function Login() {
 	  <input type="password" style={{fontSize:"20px"}} placeholder="******" value={passInput} onChange={passInputChange}></input>
 	  <br/>
 	  <button onClick={logarUsuario}>Login</button>
-	  <h2 style={{color:"white"}} id="User">{global.Auth.User}</h2>
+	  <User/>
 	  </center>
     </>
   );
 }
+
+//export {userObject};

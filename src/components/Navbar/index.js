@@ -8,9 +8,9 @@ import { FaTimesCircle } from 'react-icons/fa';
 import { FaFileImport } from 'react-icons/fa'; 
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
-import {formats, toolbarOptions, historic, handleChange, handleTitleChange, postarNoForum} from '../../Quill/config.js';
-
-import { ReactComponent as Logo } from '../../assets/logo/FlowLogo.svg';
+import {formats, toolbarOptions, historic, handleChange, handleTitleChange, postarNoForum} from 'Quill/config.js';
+//import { userObject } from 'pages/Auth/Login';
+import { ReactComponent as Logo } from 'assets/logo/FlowLogo.svg';
 import {
   Header, MenuPersonal, HamburguerMenu, PostModal, PostModalContent, EstiloResponsividade
 } from './styles';
@@ -26,16 +26,22 @@ return (
 </>
 );
 }
-
+var userObject = { displayName: "" }; //lazy loading
+if(localStorage.getItem( 'userObject' )!==undefined && JSON.parse(localStorage.getItem( 'userObject' ))!==null)
+{
+	userObject= JSON.parse(localStorage.getItem( 'userObject' ));
+	loggedIn = true;
+}
+else {
 var loggedIn = false;
+}
 
 function UserDisplay (){
-if(loggedIn)	{
 	return (	
 	<>
 	<figure/>
 	<div className="personal-infos">
-			<span>GianlucaJux</span>
+			<span>{userObject.displayName}</span>
 		<div className="info-level">
 			<AiFillStar className="level-ico" />
 			<span>2250 KD</span>
@@ -44,8 +50,6 @@ if(loggedIn)	{
 	{/*o details e a setinha não estão aqui por causa de um problema de arquitetura, como tudo isso não está sendo renderizado por uma classe, não tem como eu colocar o details antes do handlePersonalMenu ser definido */}
 	</>
 	);
-}
-return ( <a href="/Login">Fazer Login </a> );
 }
 
 //----------------------------------------------------------------------
@@ -57,9 +61,9 @@ function Navbar() {
 
 
   function handleHamburguerMenu() {
-    const details = document.getElementById('details');
+    //const details = document.getElementById('details');
 
-    if (details.open) details.open = false;
+    //if (details.open) details.open = false; obsoleto
 	IMenuIsOpen(setHamburguerMenuIsOpen, hamburguerMenuIsOpen); 
   }
 
@@ -93,8 +97,6 @@ function Navbar() {
   }
 	  
   function UserDetails () {
-	if(loggedIn)
-	{
 		return (
 		<>  
 		<details id="details" onClick={handlePersonalMenu}>
@@ -102,32 +104,34 @@ function Navbar() {
 		</details>
 		</>
 		);
-	}
-	else
-	{
-		return (
-		<>  
-		<details id="details" style={{display:"none"}} onClick={handlePersonalMenu}>
-				<summary />
-		</details>
-		</>
-		);
-	}
   }	  
-	  
+  function UserContainer() {
+	if(loggedIn){
+	  return (
+	  <>
+  		  <GoPencil id="postPencil" className="pencil-ico" onClick={handlePostModal} />
+          <UserDisplay />
+		  <UserDetails/>
+	  </>
+	);
+	}
+	else {
+	  return (
+	  <a href="/Login">Fazer Login </a> 
+	);
+	}
+  }
   return (
     <>
       <Header>
         <div>
-          <Logo className="logo" />
+          <a href="/"><Logo className="logo" /></a>
         </div>
         <input name="search" placeholder="Pesquisar..." />
         <BsSearch className="search-ico" />
         <hr />
         <div className="container-menu">
-          <GoPencil className="pencil-ico" onClick={handlePostModal} />
-          <UserDisplay />
-		  <UserDetails/>
+		  <UserContainer/>
           <GiHamburgerMenu className="menu-ico" onClick={handleHamburguerMenu} />
         </div>
       </Header>

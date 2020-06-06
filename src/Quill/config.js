@@ -31,7 +31,7 @@
     title = value;
   }	  
   var xhr = new XMLHttpRequest();
-  const firebaseURL = '{URL DE UM REALTIME DATABASE DO FIREBASE COM REGRAS DE DEBUG}'; //realtime database
+  const firebaseURL = 'https://flowrumpodcast.firebaseio.com/'; //realtime database
   var enc = new TextDecoder("utf-8"); //decodificar os posts recebidos como array
   export const postarNoForum = function() {
 	  

@@ -44,7 +44,7 @@ export default function Cadastro() {
     <>
       <Header>
         <div>
-          <Logo className="logo" />
+          <a href="/"><Logo className="logo" /></a>
         </div>
         <hr />
       </Header>

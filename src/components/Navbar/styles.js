@@ -156,7 +156,7 @@ width: 100%;
 
   .info-level {
     margin-top: 5px;
-    width: 100%;
+    width: 200%; //Garantir que o tamanho do nome do usuário não distorça o layout
   }
   
 `;
