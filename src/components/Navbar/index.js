@@ -156,7 +156,7 @@ function Navbar() {
 		</h2>
 		
 		<input type="text" style={{fontSize:"20px", marginTop:"-30px"}} placeholder="titulo" value={userInput} onChange={inputchangehandler}></input>
-		<ReactQuill className="quillEditor" modules={{toolbar: toolbarOptions, history: historic}} formats={formats} theme="snow" value={''}
+		<ReactQuill className="quillEditor" modules={{toolbar: toolbarOptions, history: historic}} formats={formats} theme="snow"
                   onChange={handleChange} />
 		<h4 className="upload-ico" onClick={IPostarNoForum}>Enviar <FaFileImport /></h4>
 		</PostModalContent>
