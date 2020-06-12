@@ -5,8 +5,9 @@ import {useLocation} from "react-router-dom";
 import { ReactComponent as Logo } from 'assets/logo/FlowLogo.svg';
 import {Header} from 'components/Navbar/styles';
 import {DivBanner} from 'pages/Landing/styles';
+import {Overlay} from 'pages/Auth/styles';
 import {config} from 'firebaseConfig';
-
+import { Card, Button, CardTitle, CardText, Input, Label } from 'reactstrap';
 
 
 export default function Login() {
@@ -36,22 +37,20 @@ export default function Login() {
 		xhr.send(JSON.stringify(postJSON));
 		xhr.onload = function(e) {
 		userObject = JSON.parse(xhr.responseText);
-		localStorage.setItem('userObject',JSON.stringify(userObject));
-		alert(xhr.responseText);//criar mensagens de erro
-		window.location.reload(false);
+		if(userObject.error === undefined) {
+			localStorage.setItem('userObject',JSON.stringify(userObject));
+			window.location.href = "/";
 		}
-		
+	    else {
+			
+			if(userObject.error.message === "EMAIL_NOT_FOUND" || userObject.error.message === "INVALID_EMAIL"){
+			alert("Email Não Cadastrado!");
+			}
+			else if(userObject.error.message === "INVALID_PASSWORD"){
+			alert("Senha Incorreta!");
+			}
+		}
 	}
-	
-	function User(){
-	var userObject = JSON.parse(localStorage.getItem( 'userObject' )) || "";
-	if(userObject.displayName!=null)
-	{
-		window.location.href = "/";
-	}
-	return (
-	<h2 style={{color:"white"}} id="User">{userObject.displayName}</h2>
-	);
 	}
 	
   return (
@@ -65,14 +64,25 @@ export default function Login() {
 	  <DivBanner>
         <img src={Banner} alt="Flow Podcast" />
       </DivBanner>
+	  <Overlay>
 	  <center>
-	  <input type="text" style={{fontSize:"20px"}} placeholder="monark@gmail.com" value={emailInput} onChange={emailInputChange}></input>
-	  <br/>
-	  <input type="password" style={{fontSize:"20px"}} placeholder="******" value={passInput} onChange={passInputChange}></input>
-	  <br/>
-	  <button onClick={logarUsuario}>Login</button>
-	  <User/>
+	  <Card body inverse style={{ backgroundColor: '#333', borderColor: '#333', maxWidth:"40%", marginTop:"7%" }}>
+        <CardTitle>
+		Login
+		<hr style={{height:"2px",borderWidth:"0",color:"gray",backgroundColor:"gray"}}/>
+		</CardTitle>
+        <CardText>
+		<Label>Email</Label>
+		 <Input type="text" style={{fontSize:"20px"}} placeholder="monark@gmail.com" value={emailInput} onChange={emailInputChange}></Input>
+		 <br/>
+		 <Label>Senha</Label>
+	     <Input type="password" style={{fontSize:"20px"}} placeholder="******" value={passInput} onChange={passInputChange}></Input>
+		 <br/>
+		</CardText> 
+	  <Button onClick={logarUsuario}>Login</Button>
+      </Card>
 	  </center>
+	  </Overlay>
     </>
   );
 }

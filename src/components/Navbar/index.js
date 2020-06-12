@@ -8,7 +8,8 @@ import { FaTimesCircle } from 'react-icons/fa';
 import { FaFileImport } from 'react-icons/fa'; 
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
-import {formats, toolbarOptions, historic, handleChange, handleTitleChange, postarNoForum} from 'Quill/config.js';
+import {formats, toolbarOptions, historic} from 'Quill/config.js';
+import {handleChange, handleTitleChange, postarNoForum} from 'communication/config.js';
 //import { userObject } from 'pages/Auth/Login';
 import { ReactComponent as Logo } from 'assets/logo/FlowLogo.svg';
 import {
@@ -93,7 +94,6 @@ function Navbar() {
   function IPostarNoForum () {
   postarNoForum();
   IMenuIsOpen(setPostModalIsOpen, postModalIsOpen);
-  window.location.reload(false); //mudar pra so dar refresh se ele estiver na lista de posts
   }
 	  
   function UserDetails () {
@@ -136,7 +136,7 @@ function Navbar() {
         </div>
       </Header>
       <MenuPersonal className="PersonalMenu" open={personalMenuIsOpen}>
-	  <span>Lorem Ipsum parabéns Gian vc tem 2250KD</span>
+	  <span>Lorem Ipsum parabéns vc tem 2250KD</span>
 	  </MenuPersonal>
       <HamburguerMenu className="HamburguerMenu" open={hamburguerMenuIsOpen}>
 	  <HamburguerMenuContent/>

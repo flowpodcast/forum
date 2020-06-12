@@ -106,13 +106,11 @@ border-radius: 10px;
 }
 
 .groups{
-background-color: #696969;
+background-color: rgb(245, 246, 247);
 width: 100%;
 min-height: 100%;
 margin-top: 13px;
 border-radius: 10px;
-overflow-x: hidden;
-overflow-y: scroll;
 }
 
 .group-infos{
@@ -143,7 +141,8 @@ border-radius: 10px;
 background-color: #696969
 }
 .post{
-background-color:white;
+border-radius:10px;
+background-color:rgb(245, 246, 247);
 margin: auto;
 height:328px;
 }

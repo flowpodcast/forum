@@ -3,12 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Alert } from 'reactstrap';
 import Banner from 'assets/imgs/BannerFlow.png';
 import Navbar from 'components/Navbar';
-import {loadForum} from 'Quill/config.js';
+import {loadForum} from 'communication/config.js';
 import {
   DivBanner,
   Chat,
 } from './styles';
 
+  
 export default function Landing() {
 return (
 	 <>
@@ -44,7 +45,8 @@ function openPost(postID) {
 	window.location.href = `/Posts/${postID}`;
 }	
 
-function ListaDePosts () {
+
+function ListaDePosts() {
 	loadForum();
 
 	if(global.PostsList !== undefined) {
@@ -52,6 +54,7 @@ function ListaDePosts () {
 	Object.values(global.PostsList).sort((a,b)=>{
              return parseInt(b.rank)  - parseInt(a.rank);
           }).map(Post =>
+	
 		  <>
 		  <center>
 		  <Alert className="hoverToGray" onClick={() => openPost(Post.postID)} color="Dark">

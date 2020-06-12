@@ -16,7 +16,7 @@ export default createGlobalStyle`
     background-color: #1E1E1E;
     font-family: 'Roboto', sans-serif;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 100vh;
   }
 
