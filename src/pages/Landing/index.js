@@ -49,13 +49,14 @@ function ListaDePosts () {
 
 	if(global.PostsList !== undefined) {
 	return (
-	Object.values(global.PostsList).map(Post =>
-	
+	Object.values(global.PostsList).sort((a,b)=>{
+             return parseInt(b.rank)  - parseInt(a.rank);
+          }).map(Post =>
 		  <>
 		  <center>
 		  <Alert className="hoverToGray" onClick={() => openPost(Post.postID)} color="Dark">
 		  <a href="#" style={{textDecoration : "none"}} className="alert-link">{Post.title}</a>
-		  <p style={{float: "right", display: "inline-block", color : "white"}}>| {Post.user} ({Post.date})</p>
+		  <p style={{float: "right", display: "inline-block", color : "white"}}>| Avaliação: {Post.rank} | {Post.user} ({Post.date})</p>
 		  </Alert>
 		  </center>
 		  </>
