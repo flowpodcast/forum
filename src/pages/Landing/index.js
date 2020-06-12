@@ -49,7 +49,7 @@ function openPost(postID) {
 function ListaDePosts() {
 	loadForum();
 
-	if(global.PostsList !== undefined) {
+	if(global.PostsList !== null) {
 	return (
 	Object.values(global.PostsList).sort((a,b)=>{
              return parseInt(b.rank)  - parseInt(a.rank);

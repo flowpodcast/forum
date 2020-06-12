@@ -1,6 +1,7 @@
   import {config} from 'firebaseConfig';
   import firebase from 'firebase';
   import {atualizarRankClient} from 'pages/Posts/index.js';
+  import DOMPurify from 'dompurify';
   
   var post = '' ;
   var title = '' ;
@@ -15,12 +16,13 @@
   var enc = new TextDecoder("utf-8"); //decodificar os posts recebidos como array
   
   export const postarNoForum = function() {
+	var configPurify = { ADD_TAGS: ['iframe'], KEEP_CONTENT: false, ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] };
 	var userObject = JSON.parse(localStorage.getItem( 'userObject' )); // não precisa conferir nada aqui porque é impossivel acessar isso sem estar logado	
     var postID=Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
 	xhr.open('PATCH', firebaseURL+'/Posts/'+postID+'/.json');
     var postJSON = { post : '', title: '', user: '', postID : '', date : '', rank: '0'};
 	postJSON = {post : ''};
-	postJSON.post = post;
+	postJSON.post = DOMPurify.sanitize(post,configPurify);
 	postJSON.title = title;
 	postJSON.postID= postID;
 	postJSON.rank= '0';
