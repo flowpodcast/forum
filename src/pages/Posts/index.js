@@ -2,7 +2,7 @@ import React from 'react';
 
 import Banner from 'assets/imgs/BannerFlow.png';
 import Navbar from 'components/Navbar';
-import {loadPost, updatePostRank} from 'communication/config.js';
+import {loadPost, updatePostRank, loadAnswers} from 'communication/config.js';
 import {useLocation} from "react-router-dom";
 import {
   DivBanner,
@@ -21,9 +21,41 @@ var numOriginal = botao.innerHTML.match(/\d+/)[0];
 botao.innerHTML= botao.innerHTML.replace(numOriginal,RankAtual);
 }
 
+function Answers() {
+	var data1=0;
+	var data2=0;
+	if(global.AnswerList !== null)
+	{
+	return (Object.values(global.AnswerList).sort((a,b)=>{
+		
+		var data1 = a.date;
+		var data2 = b.date
+		
+             return data2>data1 ? -1 : data2<data1 ? 1 : 0;
+          }).map(Post => 
+	
+		  <>
+		  <div className="groups">
+		  <center>
+		  <div dangerouslySetInnerHTML={{__html: Post.post}} className="post"> 
+		  
+		  </div>
+		  </center>
+		  </div>
+		  </>
+		  )
+	);
+	}
+	else
+	{
+		return (<></>)
+	}
+}
+
 export default function Posts() {
 var location = useLocation();
 postID = location.pathname.split('/')[2];
+loadAnswers(postID);	
 loadPost(postID); //chama um post especifico, essa pagina nao deve abrir se o usuario acessar um perfil
 if(global.PostsList['selectedPost'] === null)
 {
@@ -50,10 +82,12 @@ return (
 		  </div>
 		</center>
 		</div>
+		<Answers/>
+		
         </div>
         <div className="group-infos">
           <aside className="advertisement">advertisement rapá <button id="avaliaButton" onClick={() => updatePostRankClient(`${postID}`)}>↑ {global.PostsList['selectedPost'].rank.count} Avaliar Post</button></aside>
-		  
+		  <aside className="infos" />
         </div>
 
       </Chat>

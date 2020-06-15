@@ -18,13 +18,16 @@
   var enc = new TextDecoder("utf-8"); //decodificar os posts recebidos como array
   
   export const postarNoForum = function() {
+	  
 	var xhr = new XMLHttpRequest();// to criando um XMLHttpRequest por função pros onload não se atropelar*
 	var configPurify = { ADD_TAGS: ['iframe'], KEEP_CONTENT: false, ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] };
 	 // não precisa conferir nada aqui porque é impossivel acessar isso sem estar logado	
-    var postID=Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
+	 
+    var postID = Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
 	xhr.open('PATCH', firebaseURL+'/Posts/'+postID+'/.json');
     var postJSON = { post : '', title: '', user: '', postID : '', date : '', rank : ''};
 	//isso aqui dava pra ser uma classe só pro objeto e seria bem util dps
+	
 	postJSON = {post : ''};
 	postJSON.post = DOMPurify.sanitize(post,configPurify);
 	postJSON.title = title;
@@ -32,10 +35,44 @@
 	postJSON.rank = {}  //<-- isso aqui não devia acontecer, deveria ter uma forma melhor de instanciar toda essa bagunça
 	postJSON.rank.count='0';
 	postJSON.date = new Date().toLocaleDateString();
-	postJSON.user = userObject.displayName; //identificar user dps...
+	postJSON.user = userObject.displayName;
+	
 	xhr.send(JSON.stringify(postJSON));
 	xhr.onload = function () {window.location.href = "/"; /*trocar por algo mais solido como atualização de components.*/};
   }
+  
+  export const responderForum = function(postID) {
+	  
+	var xhr = new XMLHttpRequest();
+	var configPurify = { ADD_TAGS: ['iframe'], KEEP_CONTENT: false, ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] };
+	
+	var answerID = Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
+	xhr.open('PATCH', firebaseURL+'/Respostas/'+postID+'/'+answerID+'/.json');
+    var postJSON = { post : '', title: '', user: '', date : '', rank : ''};
+	
+	postJSON = {post : ''};
+	postJSON.post = DOMPurify.sanitize(post,configPurify);  //por algum motivo ta comendo o ultimo caracter?
+	postJSON.title = title;
+	postJSON.rank = {}
+	postJSON.rank.count='0';
+	postJSON.date = new Date();
+	postJSON.user = userObject.displayName;
+	
+	xhr.send(JSON.stringify(postJSON));
+	xhr.onload = function () {window.location.href = window.location.href; /*trocar por algo mais solido como atualização de components.*/};
+  }
+  
+    global.AnswerList = [];
+    export const loadAnswers = function(postID) { //carrega todos os posts(que serao futuramente os mais recentes/populares)
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", firebaseURL+'/Respostas/'+postID+'/.json',false);
+    xhr.onload = function(e) {
+	var json = JSON.parse(xhr.responseText);
+	global.AnswerList = json; //coloca todos os posts na raiz do banco; numa variavel global.
+	}
+	xhr.send();
+  }
+  
   
   export const updatePostRank = function(postID) {
   var xhr = new XMLHttpRequest(); //*

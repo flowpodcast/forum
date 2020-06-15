@@ -125,8 +125,9 @@ padding-right: 13px;
 
 .infos{
 position:relative;
+margin-top:18px;
 width: 100%;
-height: 50%;
+height: 45%;
 border-radius: 10px;
 background-color: #696969
 

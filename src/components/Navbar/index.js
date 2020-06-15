@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import {useLocation} from "react-router-dom";
 import { AiFillStar } from 'react-icons/ai';
 import { BsSearch } from 'react-icons/bs';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -9,8 +10,7 @@ import { FaFileImport } from 'react-icons/fa';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
 import {formats, toolbarOptions, historic} from 'Quill/config.js';
-import {handleChange, handleTitleChange, postarNoForum} from 'communication/config.js';
-//import { userObject } from 'pages/Auth/Login';
+import {handleChange, handleTitleChange, postarNoForum, responderForum} from 'communication/config.js';
 import { ReactComponent as Logo } from 'assets/logo/FlowLogo.svg';
 import {
   Header, MenuPersonal, HamburguerMenu, PostModal, PostModalContent, EstiloResponsividade
@@ -27,6 +27,8 @@ return (
 </>
 );
 }
+
+var contexto = "Escreva seu Post.";
 var userObject = { displayName: "" }; //lazy loading
 if(localStorage.getItem( 'userObject' )!==undefined && JSON.parse(localStorage.getItem( 'userObject' ))!==null)
 {
@@ -56,6 +58,7 @@ function UserDisplay (){
 //----------------------------------------------------------------------
 
 function Navbar() {
+  const location = useLocation();
   const [hamburguerMenuIsOpen, setHamburguerMenuIsOpen] = useState(false);
   const [personalMenuIsOpen, setPersonalMenuIsOpen] = useState(false);
   const [postModalIsOpen, setPostModalIsOpen] = useState(false);
@@ -100,6 +103,26 @@ function Navbar() {
   postarNoForum();
   IMenuIsOpen(setPostModalIsOpen, postModalIsOpen);
   }
+  
+  function IResponderForum () {
+  var postID= location.pathname.split('/')[2];
+  responderForum(postID);
+  IMenuIsOpen(setPostModalIsOpen, postModalIsOpen);
+  }
+	  
+  function Enviar() {
+	if(location.pathname.split('/')[1] == "Posts") {
+		return (
+		<h4 className="upload-ico" onClick={IResponderForum}>Responder <FaFileImport /></h4>
+		);
+	}
+	else
+	{
+		return (
+		<h4 className="upload-ico" onClick={IPostarNoForum}>Enviar <FaFileImport /></h4>
+		);
+	}
+  }	  
 	  
   function UserDetails () {
 		return (
@@ -111,6 +134,12 @@ function Navbar() {
 		);
   }	  
   function UserContainer() {
+	var location = useLocation();
+	
+	if(location.pathname.split('/')[1] == "Posts"){
+		contexto="Responder o Post."
+	}
+	
 	if(loggedIn){
 	  return (
 	  <>
@@ -157,13 +186,13 @@ function Navbar() {
 		</Form>  
 		*/}
 		<h2>
-		Escreva seu Post. <FaTimesCircle className="close-ico" onClick={handlePostModal} />
+		{contexto} <FaTimesCircle className="close-ico" onClick={handlePostModal} />
 		</h2>
 		
 		<input type="text" style={{fontSize:"20px", marginTop:"-30px"}} placeholder="titulo" value={userInput} onChange={inputChangeHandler}></input>
 		<ReactQuill className="quillEditor" modules={{toolbar: toolbarOptions, history: historic}} formats={formats} theme="snow" value={quillInput}
                   onChange={quillChangeHandler} />
-		<h4 className="upload-ico" onClick={IPostarNoForum}>Enviar <FaFileImport /></h4>
+		<Enviar/>
 		</PostModalContent>
 		
 		

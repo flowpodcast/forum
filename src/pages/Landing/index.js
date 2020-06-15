@@ -28,7 +28,7 @@ return (
           <div className="search-groups" />	  
           <div id="posts" className="groups">
 		<ListaDePosts/>
-		  </div> 
+		  </div>
         </div>
         <div className="group-infos">
           <aside className="infos" />
@@ -69,6 +69,9 @@ function ListaDePosts() {
 	var Lista = Object.values(global.PostsList); // performance
 	var pagination = Math.ceil(Lista.length/4);
 	
+	if(pagina>pagination)
+		window.location.href = '/';
+	
 	function Pagination() {
 	const paginationLinks = [];
 	for (var i = 1; i < pagination+1; i++) {
@@ -79,7 +82,7 @@ function ListaDePosts() {
 	
 	function ListaDePostsInternal () {
 	return (
-	Lista.sort((a,b)=>{ //pratica ruim porem transforma o server numa maquina de queries temporariamente enquanto usamos realtime database
+	Lista.sort((a,b)=>{ 
              return parseInt(b.rank.count)  - parseInt(a.rank.count);
           }).slice(paginaInicial,paginaTotal).map(Post => 
 	
