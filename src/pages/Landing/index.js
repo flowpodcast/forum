@@ -55,9 +55,10 @@ function ListaDePosts() {
 	if(pagina.toString().length>1)
 		window.location.href = '/';
 	
-	if(pagina.toString().length == 0 || pagina=="1")
+	if(pagina.toString().length == 0 || pagina=="1") {
 		pagina = 1; // só pra nao ocupar espaço mesmo...
 		paginaInicial=0;
+	}
 	
 	var paginaTotal = pagina*4;
 	var paginaInicial = (pagina-1)*4;
