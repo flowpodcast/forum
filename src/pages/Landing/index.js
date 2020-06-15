@@ -71,7 +71,7 @@ function ListaDePosts() {
 	
 	function Pagination() {
 	const paginationLinks = [];
-	for (var i = 1; i < pagination; i++) {
+	for (var i = 1; i < pagination+1; i++) {
 	paginationLinks.push(<a style={{ fontSize:"24px", color : "white", textDecoration: "none"}} href={i}>{i} </a>);
 	}	
 	return (<Alert className="hoverToGrayPagination" color="Dark">{paginationLinks}</Alert>);
