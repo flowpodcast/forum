@@ -59,7 +59,7 @@ function ListaDePosts() {
 		  <center>
 		  <Alert className="hoverToGray" onClick={() => openPost(Post.postID)} color="Dark">
 		  <a href="#" style={{textDecoration : "none"}} className="alert-link">{Post.title}</a>
-		  <p style={{float: "right", display: "inline-block", color : "white"}}>| Avaliação: {Post.rank} | {Post.user} ({Post.date})</p>
+		  <p style={{float: "right", display: "inline-block", color : "white"}}>| Avaliação: {Post.rank.count} | {Post.user} ({Post.date})</p>
 		  </Alert>
 		  </center>
 		  </>

@@ -38,7 +38,8 @@ export default function Login() {
 		xhr.onload = function(e) {
 		userObject = JSON.parse(xhr.responseText);
 		if(userObject.error === undefined) {
-			localStorage.setItem('userObject',JSON.stringify(userObject));
+			alert(xhr.responseText);
+			localStorage.setItem('userObject',JSON.stringify(userObject)); //isso aqui não é seguro, precisa trocar depois
 			window.location.href = "/";
 		}
 	    else {

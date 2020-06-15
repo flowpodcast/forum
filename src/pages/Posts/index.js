@@ -52,7 +52,7 @@ return (
 		</div>
         </div>
         <div className="group-infos">
-          <aside className="advertisement">advertisement rapá <button id="avaliaButton" onClick={() => updatePostRankClient(`${postID}`)}>↑ {global.PostsList['selectedPost'].rank} Avaliar Post</button></aside>
+          <aside className="advertisement">advertisement rapá <button id="avaliaButton" onClick={() => updatePostRankClient(`${postID}`)}>↑ {global.PostsList['selectedPost'].rank.count} Avaliar Post</button></aside>
 		  
         </div>
 

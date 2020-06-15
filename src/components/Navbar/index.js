@@ -85,10 +85,15 @@ function Navbar() {
 	menuToOpen(!originalState);
   }
   const [userInput, setUserInput] = useState('');
-
- function inputchangehandler(event) {
+  const [quillInput, setQuillInput] = useState('');
+  
+ function inputChangeHandler(event) {
     setUserInput(event.target.value);
 	handleTitleChange(event.target.value);
+  }
+   function quillChangeHandler(value) {
+    setQuillInput(value);
+	handleChange(quillInput);
   }
   
   function IPostarNoForum () {
@@ -155,9 +160,9 @@ function Navbar() {
 		Escreva seu Post. <FaTimesCircle className="close-ico" onClick={handlePostModal} />
 		</h2>
 		
-		<input type="text" style={{fontSize:"20px", marginTop:"-30px"}} placeholder="titulo" value={userInput} onChange={inputchangehandler}></input>
-		<ReactQuill className="quillEditor" modules={{toolbar: toolbarOptions, history: historic}} formats={formats} theme="snow"
-                  onChange={handleChange} />
+		<input type="text" style={{fontSize:"20px", marginTop:"-30px"}} placeholder="titulo" value={userInput} onChange={inputChangeHandler}></input>
+		<ReactQuill className="quillEditor" modules={{toolbar: toolbarOptions, history: historic}} formats={formats} theme="snow" value={quillInput}
+                  onChange={quillChangeHandler} />
 		<h4 className="upload-ico" onClick={IPostarNoForum}>Enviar <FaFileImport /></h4>
 		</PostModalContent>
 		

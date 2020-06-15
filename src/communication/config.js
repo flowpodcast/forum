@@ -5,19 +5,22 @@
   
   var post = '' ;
   var title = '' ;
+  
   export const handleChange = function(value){
     post = value;
   }	
   export const handleTitleChange = function(value){
     title = value;
   }	  
-  var xhr = new XMLHttpRequest();
+  
+  var userObject = JSON.parse(localStorage.getItem( 'userObject' ));
   const firebaseURL = config.databaseURL; //realtime database         
   var enc = new TextDecoder("utf-8"); //decodificar os posts recebidos como array
   
   export const postarNoForum = function() {
+	var xhr = new XMLHttpRequest();// to criando um XMLHttpRequest por função pros onload não se atropelar*
 	var configPurify = { ADD_TAGS: ['iframe'], KEEP_CONTENT: false, ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] };
-	var userObject = JSON.parse(localStorage.getItem( 'userObject' )); // não precisa conferir nada aqui porque é impossivel acessar isso sem estar logado	
+	 // não precisa conferir nada aqui porque é impossivel acessar isso sem estar logado	
     var postID=Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
 	xhr.open('PATCH', firebaseURL+'/Posts/'+postID+'/.json');
     var postJSON = { post : '', title: '', user: '', postID : '', date : '', rank: '0'};
@@ -33,22 +36,26 @@
   }
   
   export const updatePostRank = function(postID) {
+  var xhr = new XMLHttpRequest(); //*
   var RankAtual=0;	  
-  xhr.open('GET', firebaseURL+'/Posts/'+postID+'/.json',true);
+  xhr.open('GET', firebaseURL+'/Posts/'+postID+'/rank/.json',true);
   xhr.send();
   xhr.onload = function(e) {
-  RankAtual= JSON.parse(xhr.responseText).rank;
+  RankAtual = JSON.parse(xhr.responseText).count;
   updatePostRankInternal(RankAtual,postID);
   }
-  
-  }
+}
   
   function updatePostRankInternal(RankAtual,postID) {
-  var xhr2 = new XMLHttpRequest(); // Prática cancerigena, alguem muda isso daqui.
-  xhr2.open('PATCH', firebaseURL+'/Posts/'+postID+'/.json');
-  xhr2.send('{"rank" :"'+(parseInt(RankAtual)+1).toString()+'"}'); 
-  atualizarRankClient(parseInt(RankAtual)+1);
+  var xhr = new XMLHttpRequest(); // * Prática cancerigena, alguem muda isso daqui.
+  xhr.open('PATCH', firebaseURL+'/Posts/'+postID+'/.json');
+  xhr.send('{"rank" : { "count": "'+(parseInt(RankAtual)+1).toString()+'","likedBy" : {"'+userObject.localId+'" : "true"}}}'); 
+  xhr.onload = function () {
+  if(JSON.parse(xhr.responseText).error === undefined) //se na hora de dar upvote a validação falhar pq ja tinha upvote ignore a parte de mudar pro client
+	  atualizarRankClient(parseInt(RankAtual)+1);
   }
+  
+}
   
 	//cloud firestore
     //export const postarNoForum = function() {
@@ -72,6 +79,7 @@
   
   global.PostsList = [];
   export const loadPost = function(id) { 
+    var xhr = new XMLHttpRequest();
     xhr.open("GET", firebaseURL+'/Posts/'+id+'/.json', false);
 	xhr.onload = function(e) {
 	//console.log(JSON.parse(xhr.responseText));
@@ -82,7 +90,7 @@
   }
   
   export const loadForum = function() { //carrega todos os posts(que serao futuramente os mais recentes/populares)
-  
+  var xhr = new XMLHttpRequest();
   xhr.open("GET", firebaseURL+'/Posts'+'/.json',false);
   xhr.onload = function(e) {
 	var json = JSON.parse(xhr.responseText);
