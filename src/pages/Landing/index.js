@@ -64,20 +64,25 @@ function ListaDePosts() {
 	var paginaInicial = (pagina-1)*4;
 	
 	
-	
-	if(global.PostsList !== null) {
-	var Lista = Object.values(global.PostsList); // performance
-	var pagination = Math.ceil(Lista.length/4);
-	
-	if(pagina>pagination)
-		window.location.href = '/';
-	
+    var Lista = Object.values(global.PostsList ?? new Array());// performance
 	function Pagination() {
-	const paginationLinks = [];
-	for (var i = 1; i < pagination+1; i++) {
-	paginationLinks.push(<a style={{ fontSize:"24px", color : "white", textDecoration: "none"}} href={i}>{i} </a>);
-	}	
-	return (<Alert className="hoverToGrayPagination" color="Dark">{paginationLinks}</Alert>);
+	if(global.PostsList !== null) {
+		
+		var pagination = Math.ceil(Lista.length/4);
+	
+		if(pagina>pagination)
+			window.location.href = '/';
+	
+		const paginationLinks = [];
+		for (var i = 1; i < pagination+1; i++) {
+		paginationLinks.push(<a style={{ fontSize:"24px", color : "white", textDecoration: "none"}} href={i}>{i} </a>);
+		}	
+			return (<Alert className="hoverToGrayPagination" color="Dark">{paginationLinks}</Alert>);
+		}
+		else
+		{
+			return(<></>);
+		}
 	}
 	
 	function ListaDePostsInternal () {
@@ -96,6 +101,8 @@ function ListaDePosts() {
 		);
 	}
 	
+	if(Lista !== null)	
+	{
 	return (
 	<>
 	<center>
@@ -104,5 +111,8 @@ function ListaDePosts() {
 	</center>
 	</>);
 	}
-	return ( <h1>Nada aqui...</h1>);
+	else
+	{
+		return ( <h1>Nada aqui...</h1>);
+	}
 }

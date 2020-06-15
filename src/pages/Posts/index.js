@@ -48,7 +48,7 @@ function Answers() {
 	}
 	else
 	{
-		return (<></>)
+		return (<></>);
 	}
 }
 
