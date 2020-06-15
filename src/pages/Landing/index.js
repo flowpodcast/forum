@@ -50,12 +50,10 @@ function openPost(postID) {
 function ListaDePosts() {
 	loadForum();
 	var location = useLocation();
-    var pagina = location.pathname.split('/')[1];
+    var pagina = location.pathname.split('/')[2];
 	
-	if(pagina.toString().length>1)
-		window.location.href = '/';
 	
-	if(pagina.toString().length == 0 || pagina=="1") {
+	if(pagina === undefined) {
 		pagina = 1; // só pra nao ocupar espaço mesmo...
 		paginaInicial=0;
 	}
@@ -75,7 +73,7 @@ function ListaDePosts() {
 	
 		const paginationLinks = [];
 		for (var i = 1; i < pagination+1; i++) {
-		paginationLinks.push(<a style={{ fontSize:"24px", color : "white", textDecoration: "none"}} href={i}>{i} </a>);
+		paginationLinks.push(<a style={{ fontSize:"24px", color : "white", textDecoration: "none"}} href={`/Pagina/${i}`}>{i} </a>);
 		}	
 			return (<Alert className="hoverToGrayPagination" color="Dark">{paginationLinks}</Alert>);
 		}

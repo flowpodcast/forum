@@ -14,7 +14,7 @@ function App() {
     <Router>
       <Container id="main" fluid>
 	  <Route exact path="/" component={LandingPage} /> 
-        <Route exact path="/:pagina" component={LandingPage} />
+	    <Route path="/Pagina/:pagina" component={LandingPage} /> 
 		<Route path="/Posts/:titulo" component={Posts} />
 		<Route path="/Login" component={Login} />
 		<Route path="/Cadastro" component={Cadastro} />
