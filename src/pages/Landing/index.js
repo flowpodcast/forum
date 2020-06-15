@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Alert } from 'reactstrap';
 import Banner from 'assets/imgs/BannerFlow.png';
 import Navbar from 'components/Navbar';
+import {useLocation} from "react-router-dom";
 import {loadForum} from 'communication/config.js';
 import {
   DivBanner,
@@ -48,23 +49,56 @@ function openPost(postID) {
 
 function ListaDePosts() {
 	loadForum();
-
+	var location = useLocation();
+    var pagina = location.pathname.split('/')[1];
+	
+	if(pagina.toString().length>1)
+		window.location.href = '/';
+	
+	if(pagina.toString().length == 0 || pagina=="1")
+		pagina = 1; // só pra nao ocupar espaço mesmo...
+		paginaInicial=0;
+	
+	var paginaTotal = pagina*4;
+	var paginaInicial = (pagina-1)*4;
+	
+	
+	
 	if(global.PostsList !== null) {
+	var Lista = Object.values(global.PostsList); // performance
+	var pagination = Math.ceil(Lista.length/4);
+	
+	function Pagination() {
+	const paginationLinks = [];
+	for (var i = 1; i < pagination; i++) {
+	paginationLinks.push(<a style={{ fontSize:"24px", color : "white", textDecoration: "none"}} href={i}>{i} </a>);
+	}	
+	return (<Alert className="hoverToGrayPagination" color="Dark">{paginationLinks}</Alert>);
+	}
+	
+	function ListaDePostsInternal () {
 	return (
-	Object.values(global.PostsList).sort((a,b)=>{
-             return parseInt(b.rank)  - parseInt(a.rank);
-          }).map(Post =>
+	Lista.sort((a,b)=>{ //pratica ruim porem transforma o server numa maquina de queries temporariamente enquanto usamos realtime database
+             return parseInt(b.rank.count)  - parseInt(a.rank.count);
+          }).slice(paginaInicial,paginaTotal).map(Post => 
 	
 		  <>
-		  <center>
 		  <Alert className="hoverToGray" onClick={() => openPost(Post.postID)} color="Dark">
 		  <a href="#" style={{textDecoration : "none"}} className="alert-link">{Post.title}</a>
 		  <p style={{float: "right", display: "inline-block", color : "white"}}>| Avaliação: {Post.rank.count} | {Post.user} ({Post.date})</p>
 		  </Alert>
-		  </center>
 		  </>
-		  ));
-		 
+		  )
+		);
+	}
+	
+	return (
+	<>
+	<center>
+		<ListaDePostsInternal/>
+		<Pagination/>
+	</center>
+	</>);
 	}
 	return ( <h1>Nada aqui...</h1>);
 }

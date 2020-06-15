@@ -13,7 +13,8 @@ function App() {
   return (
     <Router>
       <Container id="main" fluid>
-        <Route exact path="/" component={LandingPage} />
+	  <Route exact path="/" component={LandingPage} /> 
+        <Route exact path="/:pagina" component={LandingPage} /> //dps vai precisar trocar por causa dos topicos
 		<Route path="/Posts/:titulo" component={Posts} />
 		<Route path="/Login" component={Login} />
 		<Route path="/Cadastro" component={Cadastro} />

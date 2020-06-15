@@ -23,12 +23,14 @@
 	 // não precisa conferir nada aqui porque é impossivel acessar isso sem estar logado	
     var postID=Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
 	xhr.open('PATCH', firebaseURL+'/Posts/'+postID+'/.json');
-    var postJSON = { post : '', title: '', user: '', postID : '', date : '', rank: '0'};
+    var postJSON = { post : '', title: '', user: '', postID : '', date : '', rank : ''};
+	//isso aqui dava pra ser uma classe só pro objeto e seria bem util dps
 	postJSON = {post : ''};
 	postJSON.post = DOMPurify.sanitize(post,configPurify);
 	postJSON.title = title;
 	postJSON.postID= postID;
-	postJSON.rank= '0';
+	postJSON.rank = {}  //<-- isso aqui não devia acontecer, deveria ter uma forma melhor de instanciar toda essa bagunça
+	postJSON.rank.count='0';
 	postJSON.date = new Date().toLocaleDateString();
 	postJSON.user = userObject.displayName; //identificar user dps...
 	xhr.send(JSON.stringify(postJSON));

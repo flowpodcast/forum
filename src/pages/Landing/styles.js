@@ -149,4 +149,17 @@ background-color:black;
 cursor: pointer;
 background-color:gray;
 }
+
+.hoverToGrayPagination {
+margin-bottom: 0.1rem;
+transition: 0.5s;
+background-color:black;
+}
+
+.hoverToGrayPagination a:hover {
+margin-bottom: 0.1rem;
+transition: 0.7s;
+background-color:gray;
+}
+
 `;
