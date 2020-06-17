@@ -38,7 +38,7 @@ export default function Login() {
 		xhr.onload = function(e) {
 		userObject = JSON.parse(xhr.responseText);
 		if(userObject.error === undefined) {
-			alert(xhr.responseText);
+			//alert(xhr.responseText);
 			localStorage.setItem('userObject',JSON.stringify(userObject)); //isso aqui não é seguro, precisa trocar depois
 			window.location.href = "/";
 		}
@@ -81,6 +81,7 @@ export default function Login() {
 		 <br/>
 		</CardText> 
 	  <Button onClick={logarUsuario}>Login</Button>
+	  <a style={{color:"white",marginTop:"15px"}} href="/Cadastro">Não tem uma conta?</a>
       </Card>
 	  </center>
 	  </Overlay>

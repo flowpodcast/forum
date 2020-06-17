@@ -108,7 +108,7 @@ border-radius: 10px;
 .groups{
 background-color: rgb(245, 246, 247);
 width: 100%;
-min-height: 75%;
+min-height: inherit;
 margin-top: 13px;
 border-radius: 10px;
 }
@@ -142,6 +142,7 @@ border-radius: 10px;
 background-color: #696969
 }
 .post{
+padding-top:3%;
 border-radius:10px;
 background-color:rgb(245, 246, 247);
 margin: auto;

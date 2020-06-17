@@ -9,6 +9,7 @@ export default createGlobalStyle`
     padding: 0;
     margin: 0;
   }
+  
 
   #main {
     /* background: linear-gradient(180deg, #21c25e, #1ce267); */
