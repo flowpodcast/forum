@@ -98,6 +98,15 @@ min-height: 100vh;
 padding: 13px 13px;
 }
 
+@media (min-height: 800px) { 
+.group-container{
+
+width: 80%;
+min-height: 60vh;
+padding: 13px 13px;
+}
+}
+
 .search-groups{
 background-color: #696969;
 width: calc(100% -13px);
