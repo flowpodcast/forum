@@ -108,7 +108,7 @@ border-radius: 10px;
 .groups{
 background-color: rgb(245, 246, 247);
 width: 100%;
-min-height: 100%;
+min-height: 75%;
 margin-top: 13px;
 border-radius: 10px;
 }
@@ -147,4 +147,14 @@ background-color:rgb(245, 246, 247);
 margin: auto;
 height:328px;
 }
+  figure{
+  width: 45px;
+  height: 45px;
+  background-color: #141414;
+  overflow: hidden;
+  border-radius: 5px;
+  margin-bottom:0px;
+  margin-top:10%;
+
+  }
 `;

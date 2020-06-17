@@ -35,6 +35,12 @@ function Answers() {
           }).map(Post => 
 	
 		  <>
+		  <aside style={{float:"left",width:"20%", height:"20%",color: "white"}} className="infos">
+			<center>
+			<figure/>
+			{Post.user}
+			</center>
+		  </aside>
 		  <div className="groups">
 		  <center>
 		  <div dangerouslySetInnerHTML={{__html: Post.post}} className="post"> 
@@ -76,10 +82,16 @@ return (
       </DivBanner>
       <Chat>
         <div className="group-container">
+		<aside style={{float:"left",width:"20%", height:"20%",color: "white"}} className="infos">
+		<center>
+		<figure/>
+		{global.PostsList['selectedPost'].user}
+		</center>
+		</aside>
 		<div className="groups">
 		<center>
-          <div dangerouslySetInnerHTML={{__html: global.PostsList['selectedPost'].post}} className="post">
-		  </div>
+		<div dangerouslySetInnerHTML={{__html: global.PostsList['selectedPost'].post}} className="post">
+		</div>
 		</center>
 		</div>
 		<Answers/>
