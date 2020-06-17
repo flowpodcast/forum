@@ -87,26 +87,24 @@ function Navbar() {
 	setPostModalIsOpen(false);
 	menuToOpen(!originalState);
   }
-  const [userInput, setUserInput] = useState('');
+  const [titleInput, setTitleInput] = useState('');
   const [quillInput, setQuillInput] = useState('');
   
  function inputChangeHandler(event) {
-    setUserInput(event.target.value);
-	handleTitleChange(event.target.value);
+    setTitleInput(event.target.value);
   }
    function quillChangeHandler(value) {
     setQuillInput(value);
-	handleChange(quillInput);
   }
   
   function IPostarNoForum () {
-  postarNoForum();
+  postarNoForum(quillInput,titleInput);
   IMenuIsOpen(setPostModalIsOpen, postModalIsOpen);
   }
   
   function IResponderForum () {
   var postID= location.pathname.split('/')[2];
-  responderForum(postID);
+  responderForum(postID,quillInput,titleInput);
   IMenuIsOpen(setPostModalIsOpen, postModalIsOpen);
   }
 	  
@@ -189,7 +187,7 @@ function Navbar() {
 		{contexto} <FaTimesCircle className="close-ico" onClick={handlePostModal} />
 		</h2>
 		
-		<input type="text" style={{fontSize:"20px", marginTop:"-30px"}} placeholder="titulo" value={userInput} onChange={inputChangeHandler}></input>
+		<input type="text" style={{fontSize:"20px", marginTop:"-30px"}} placeholder="titulo" value={titleInput} onChange={inputChangeHandler}></input>
 		<ReactQuill className="quillEditor" modules={{toolbar: toolbarOptions, history: historic}} formats={formats} theme="snow" value={quillInput}
                   onChange={quillChangeHandler} />
 		<Enviar/>

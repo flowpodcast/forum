@@ -6,18 +6,12 @@
   var post = '' ;
   var title = '' ;
   
-  export const handleChange = function(value){
-    post = value;
-  }	
-  export const handleTitleChange = function(value){
-    title = value;
-  }	  
   
   var userObject = JSON.parse(localStorage.getItem( 'userObject' ));
   const firebaseURL = config.databaseURL; //realtime database         
   var enc = new TextDecoder("utf-8"); //decodificar os posts recebidos como array
   
-  export const postarNoForum = function() {
+  export const postarNoForum = function(post,titulo) {
 	  
 	var xhr = new XMLHttpRequest();// to criando um XMLHttpRequest por função pros onload não se atropelar*
 	var configPurify = { ADD_TAGS: ['iframe'], KEEP_CONTENT: false, ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] };
@@ -30,7 +24,7 @@
 	
 	postJSON = {post : ''};
 	postJSON.post = DOMPurify.sanitize(post,configPurify);
-	postJSON.title = title;
+	postJSON.title = titulo;
 	postJSON.postID= postID;
 	postJSON.rank = {}  //<-- isso aqui não devia acontecer, deveria ter uma forma melhor de instanciar toda essa bagunça
 	postJSON.rank.count='0';
@@ -38,10 +32,10 @@
 	postJSON.user = userObject.displayName;
 	
 	xhr.send(JSON.stringify(postJSON));
-	xhr.onload = function () {window.location.href = "/"; /*trocar por algo mais solido como atualização de components.*/};
+	xhr.onload = function () {window.location.href = window.location.href; /*trocar por algo mais solido como atualização de components.*/};
   }
   
-  export const responderForum = function(postID) {
+  export const responderForum = function(postID,post,titulo) {
 	  
 	var xhr = new XMLHttpRequest();
 	var configPurify = { ADD_TAGS: ['iframe'], KEEP_CONTENT: false, ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] };
@@ -52,7 +46,7 @@
 	
 	postJSON = {post : ''};
 	postJSON.post = DOMPurify.sanitize(post,configPurify);  //por algum motivo ta comendo o ultimo caracter?
-	postJSON.title = title;
+	postJSON.title = titulo;
 	postJSON.rank = {}
 	postJSON.rank.count='0';
 	postJSON.date = new Date();
