@@ -16,18 +16,6 @@ import {
   Header, MenuPersonal, HamburguerMenu, PostModal, PostModalContent, EstiloResponsividade
 } from './styles';
 
-function HamburguerMenuContent() { //isso aqui podia ser um novo arquivo com todos os "contents" ---------------------
-return ( 
-<>
-<center> {/*me julgue, o margin auto não foi.*/}
-	<h2>
-		<a href="/Cadastro">Cadastro</a>
-	</h2>
-</center>
-</>
-);
-}
-
 var contexto = "Escreva seu Post.";
 var userObject = { displayName: "" }; //lazy loading
 if(localStorage.getItem( 'userObject' )!==undefined && JSON.parse(localStorage.getItem( 'userObject' ))!==null)
@@ -37,6 +25,38 @@ if(localStorage.getItem( 'userObject' )!==undefined && JSON.parse(localStorage.g
 }
 else {
 var loggedIn = false;
+}
+
+function Sair() {
+localStorage.clear();
+window.location.href = window.location.href;
+}
+
+function HamburguerMenuContent() { //isso aqui podia ser um novo arquivo com todos os "contents" ---------------------
+	if(loggedIn==false)
+	{
+	return ( 
+	<>
+	<center> {/*me julgue, o margin auto não foi.*/}
+		<h2>
+			<a href="/Cadastro">Cadastro</a>
+		</h2>
+	</center>
+	</>
+	);
+	}
+	else
+	{
+		return (
+		<>
+		<center> 
+		<h2>
+			<a onClick={Sair} href="#">Sair</a> 
+		</h2>
+		</center>
+		</>
+		);
+	}
 }
 
 function UserDisplay (){
