@@ -2,6 +2,7 @@
   import firebase from 'firebase';
   import {atualizarRankClient} from 'pages/Posts/index.js';
   import DOMPurify from 'dompurify';
+  import forumPost from 'communication/gerenciadorHttp.js';
   
   var post = '' ;
   var title = '' ;
@@ -19,17 +20,7 @@
 	 
     var postID = Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
 	xhr.open('PATCH', firebaseURL+'/Posts/'+postID+'/.json');
-    var postJSON = { post : '', title: '', user: '', postID : '', date : '', rank : ''};
-	//isso aqui dava pra ser uma classe só pro objeto e seria bem util dps
-	
-	postJSON = {post : ''};
-	postJSON.post = DOMPurify.sanitize(post,configPurify);
-	postJSON.title = titulo;
-	postJSON.postID= postID;
-	postJSON.rank = {}  //<-- isso aqui não devia acontecer, deveria ter uma forma melhor de instanciar toda essa bagunça
-	postJSON.rank.count='0';
-	postJSON.date = new Date().toLocaleDateString();
-	postJSON.user = userObject.displayName;
+    var postJSON = new forumPost(post,titulo,postID,'0',userObject.displayName);
 	
 	xhr.send(JSON.stringify(postJSON));
 	xhr.onload = function () {window.location.href = window.location.href; /*trocar por algo mais solido como atualização de components.*/};
@@ -42,15 +33,7 @@
 	
 	var answerID = Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
 	xhr.open('PATCH', firebaseURL+'/Respostas/'+postID+'/'+answerID+'/.json');
-    var postJSON = { post : '', title: '', user: '', date : '', rank : ''};
-	
-	postJSON = {post : ''};
-	postJSON.post = DOMPurify.sanitize(post,configPurify);  //por algum motivo ta comendo o ultimo caracter?
-	postJSON.title = titulo;
-	postJSON.rank = {}
-	postJSON.rank.count='0';
-	postJSON.date = new Date();
-	postJSON.user = userObject.displayName;
+    var postJSON = new forumPost(post,titulo,postID,'0',userObject.displayName);
 	
 	xhr.send(JSON.stringify(postJSON));
 	xhr.onload = function () {window.location.href = window.location.href; /*trocar por algo mais solido como atualização de components.*/};
@@ -75,7 +58,7 @@
   xhr.send();
   xhr.onload = function(e) {
   RankAtual = JSON.parse(xhr.responseText).count;
-  updatePostRankInternal(RankAtual,postID);
+  updatePostRankInternal(RankAtual,postID); //isso aqui vai pra classe depois (forumPost.send(blabla,blabla,forumPost.send(recursion))
   }
 }
   
