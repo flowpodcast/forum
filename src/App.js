@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 import LandingPage from 'pages/Landing';
+import LandingPesquisa from 'pages/Pesquisa';
 import Posts from 'pages/Posts';
 import Login from 'pages/Auth/Login';
 import Cadastro from 'pages/Auth/Cadastro';
@@ -16,6 +17,7 @@ function App() {
 	  <Route exact path="/" component={LandingPage} /> 
 	    <Route path="/Pagina/:pagina" component={LandingPage} /> 
 		<Route path="/Posts/:titulo" component={Posts} />
+		<Route path="/Pesquisa" component={LandingPesquisa} />
 		<Route path="/Login" component={Login} />
 		<Route path="/Cadastro" component={Cadastro} />
       </Container>

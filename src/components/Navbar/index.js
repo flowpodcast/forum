@@ -175,14 +175,25 @@ function Navbar() {
 	);
 	}
   }
+  
+  function pesquisar() {
+  localStorage.setItem("pesquisa",document.getElementById("pesquisaBox").value);
+  window.location.href = "/Pesquisa";  
+  }
+  
+  function pesquisaKeyEvent(event) {
+	if(event.key === "Enter") {
+	pesquisar();
+	}
+  }
   return (
     <>
       <Header>
         <div>
           <a href="/"><Logo className="logo" /></a>
         </div>
-        <input name="search" placeholder="Pesquisar..." />
-        <BsSearch className="search-ico" />
+        <input id="pesquisaBox" onKeyPress={pesquisaKeyEvent} name="search" placeholder="Pesquisar..." />
+        <BsSearch onClick={pesquisar} className="search-ico" />
         <hr />
         <div className="container-menu">
 		  <UserContainer/>
