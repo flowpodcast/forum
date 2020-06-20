@@ -14,29 +14,27 @@
   
   export const postarNoForum = function(post,titulo) {
 	  
-	var xhr = new XMLHttpRequest();// to criando um XMLHttpRequest por função pros onload não se atropelar*
 	var configPurify = { ADD_TAGS: ['iframe'], KEEP_CONTENT: false, ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] };
 	 // não precisa conferir nada aqui porque é impossivel acessar isso sem estar logado	
-	 
     var postID = Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
-	xhr.open('PATCH', firebaseURL+'/Posts/'+postID+'/.json');
+	var endereco = firebaseURL+'/Posts/'+postID+'/.json';
+	
     var postJSON = new forumPost(post,titulo,postID,'0',userObject.displayName);
 	
-	xhr.send(JSON.stringify(postJSON));
-	xhr.onload = function () {window.location.href = window.location.href; /*trocar por algo mais solido como atualização de components.*/};
+	var callback = function () {window.location.href = window.location.href; /*trocar por algo mais solido como atualização de components.*/};
+	postJSON.send('PATCH',endereco,callback);
   }
   
   export const responderForum = function(postID,post,titulo) {
-	  
-	var xhr = new XMLHttpRequest();
 	var configPurify = { ADD_TAGS: ['iframe'], KEEP_CONTENT: false, ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] };
 	
 	var answerID = Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
-	xhr.open('PATCH', firebaseURL+'/Respostas/'+postID+'/'+answerID+'/.json');
+	//xhr.open('PATCH', );
     var postJSON = new forumPost(post,titulo,postID,'0',userObject.displayName);
+	var endereco = firebaseURL+'/Respostas/'+postID+'/'+answerID+'/.json';
+	var callback = function () {window.location.href = window.location.href; /*trocar por algo mais solido como atualização de components.*/};
+	postJSON.send('PATCH',endereco,callback);
 	
-	xhr.send(JSON.stringify(postJSON));
-	xhr.onload = function () {window.location.href = window.location.href; /*trocar por algo mais solido como atualização de components.*/};
   }
   
     global.AnswerList = [];
@@ -58,7 +56,7 @@
   xhr.send();
   xhr.onload = function(e) {
   RankAtual = JSON.parse(xhr.responseText).count;
-  updatePostRankInternal(RankAtual,postID); //isso aqui vai pra classe depois (forumPost.send(blabla,blabla,forumPost.send(recursion))
+  updatePostRankInternal(RankAtual,postID);
   }
 }
   
