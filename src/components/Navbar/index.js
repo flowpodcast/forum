@@ -18,6 +18,7 @@ import {
 
 var contexto = "Escreva seu Post.";
 var userObject = { displayName: "" }; //lazy loading
+var displayTitle = 'initial';
 if(localStorage.getItem( 'userObject' )!==undefined && JSON.parse(localStorage.getItem( 'userObject' ))!==null)
 {
 	userObject= JSON.parse(localStorage.getItem( 'userObject' ));
@@ -130,6 +131,7 @@ function Navbar() {
 	  
   function Enviar() {
 	if(location.pathname.split('/')[1] == "Posts") {
+		displayTitle = 'none';
 		return (
 		<h4 className="upload-ico" onClick={IResponderForum}>Responder <FaFileImport /></h4>
 		);
@@ -207,7 +209,7 @@ function Navbar() {
 		{contexto} <FaTimesCircle className="close-ico" onClick={handlePostModal} />
 		</h2>
 		
-		<input type="text" style={{fontSize:"20px", marginTop:"-30px"}} placeholder="titulo" value={titleInput} onChange={inputChangeHandler}></input>
+		<input type="text" style={{fontSize:"20px", marginTop:"-30px", display:displayTitle}} placeholder="Título" value={titleInput} onChange={inputChangeHandler}></input>
 		<ReactQuill className="quillEditor" modules={{toolbar: toolbarOptions, history: historic}} formats={formats} theme="snow" value={quillInput}
                   onChange={quillChangeHandler} />
 		<Enviar/>
