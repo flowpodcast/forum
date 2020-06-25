@@ -231,8 +231,8 @@ export const PostModalContent = styled.div`
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 600px;
-  height: 500px;
+  width: 1000px;
+  height: 600px;
   color:white;
   opacity: 0;
   transition: 0.5s;
@@ -254,7 +254,7 @@ export const PostModalContent = styled.div`
   cursor: pointer;
   transition: .5s;
   
-  margin-left:57%;
+  margin-left:75%;
   }
   .close-ico:hover{
   color: red;
