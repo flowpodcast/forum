@@ -1,4 +1,4 @@
-  import {config} from 'firebaseConfig';
+  import {config} from 'serverConfig';
   import firebase from 'firebase';
   import {atualizarRankClient} from 'pages/Posts/index.js';
   import DOMPurify from 'dompurify';

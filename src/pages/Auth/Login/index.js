@@ -74,7 +74,7 @@ export default function Login() {
 		</CardTitle>
         <CardText>
 		<Label>Email</Label>
-		 <Input type="text" style={{fontSize:"20px"}} placeholder="monark@gmail.com" value={emailInput} onChange={emailInputChange}></Input>
+		 <Input type="text" style={{fontSize:"20px"}} placeholder="monark@gmail.com" value={emailInput} onChange={emailInputChange} required></Input>
 		 <br/>
 		 <Label>Senha</Label>
 	     <Input type="password" style={{fontSize:"20px"}} placeholder="******" value={passInput} onChange={passInputChange}></Input>
