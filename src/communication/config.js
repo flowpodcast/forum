@@ -12,17 +12,15 @@
   const firebaseURL = config.databaseURL; //realtime database         
   var enc = new TextDecoder("utf-8"); //decodificar os posts recebidos como array
   
-  export const postarNoForum = function(post,titulo) {
-	  
+  export const postarNoForum = function(post,titulo) { 
+  
 	var configPurify = { ADD_TAGS: ['iframe'], KEEP_CONTENT: false, ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] };
-	 // não precisa conferir nada aqui porque é impossivel acessar isso sem estar logado	
-    var postID = Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
-	var endereco = firebaseURL+'/Posts/'+postID+'/.json';
+    var postID = Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random e tirar do client
 	
+	var endereco = Url().posts;
     var postJSON = new forumAPI(post,titulo,postID,'0',userObject.displayName);
-	
 	var callback = function () {window.location.href = window.location.href; /*trocar por algo mais solido como atualização de components.*/};
-	postJSON.send('PATCH',endereco,callback);
+	postJSON.send(endereco,callback);
   }
   
   export const responderForum = function(postID,post,titulo) {

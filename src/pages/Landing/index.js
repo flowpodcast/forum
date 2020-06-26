@@ -99,7 +99,7 @@ function ListaDePosts() {
 		);
 	}
 	
-	if(Lista !== null)	
+	if(Lista !== null && Lista.length != 0)	
 	{
 	return (
 	<>

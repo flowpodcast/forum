@@ -9,13 +9,10 @@ export default class forumAPI {
 	this.user = user;
 	this.asPOJO = JSON.stringify(this);
   }
-  send(tipo,endereco,callback) {
+  send(endereco,callback) {
   var xhr = new XMLHttpRequest();
-  xhr.open(tipo, endereco);
-  xhr.send(this.asPOJO);
+  xhr.open('POST', endereco, false); //sempre vai ser POST porque o server que decide dps na hora de ir pro banco.
   xhr.onload = callback;
-  }
-  getList(endereco,callback) {
-  
+  xhr.send(this.asPOJO);
   }
 }
