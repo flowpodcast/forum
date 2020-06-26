@@ -2,7 +2,7 @@
   import firebase from 'firebase';
   import {atualizarRankClient} from 'pages/Posts/index.js';
   import DOMPurify from 'dompurify';
-  import forumPost from 'communication/gerenciadorHttp.js';
+  import forumAPI from 'communication/gerenciadorHttp.js';
   
   var post = '' ;
   var title = '' ;
@@ -19,7 +19,7 @@
     var postID = Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
 	var endereco = firebaseURL+'/Posts/'+postID+'/.json';
 	
-    var postJSON = new forumPost(post,titulo,postID,'0',userObject.displayName);
+    var postJSON = new forumAPI(post,titulo,postID,'0',userObject.displayName);
 	
 	var callback = function () {window.location.href = window.location.href; /*trocar por algo mais solido como atualização de components.*/};
 	postJSON.send('PATCH',endereco,callback);
@@ -30,7 +30,7 @@
 	
 	var answerID = Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
 	//xhr.open('PATCH', );
-    var postJSON = new forumPost(post,titulo,postID,'0',userObject.displayName);
+    var postJSON = new forumAPI(post,titulo,postID,'0',userObject.displayName);
 	var endereco = firebaseURL+'/Respostas/'+postID+'/'+answerID+'/.json';
 	var callback = function () {window.location.href = window.location.href; /*trocar por algo mais solido como atualização de components.*/};
 	postJSON.send('PATCH',endereco,callback);
@@ -39,13 +39,19 @@
   
     global.AnswerList = [];
     export const loadAnswers = function(postID) { //carrega todos os posts(que serao futuramente os mais recentes/populares)
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", firebaseURL+'/Respostas/'+postID+'/.json',false);
-    xhr.onload = function(e) {
-	var json = JSON.parse(xhr.responseText);
-	global.AnswerList = json; //coloca todos os posts na raiz do banco; numa variavel global.
-	}
-	xhr.send();
+	
+	Get(Url(postID).respostas,function(response){
+		var json = JSON.parse(JSON.parse(response).data); //sera que isso é um problema de performance?
+		global.AnswerList = json; //coloca todos os posts na raiz do banco; numa variavel global.
+	});
+	
+    //var xhr = new XMLHttpRequest();
+    //Get(firebaseURL+'/Respostas/'+postID+'/.json',false);
+    //xhr.onload = function(e) {
+	//var json = JSON.parse(xhr.responseText);
+	//global.AnswerList = json; //coloca todos os posts na raiz do banco; numa variavel global.
+	//}
+	//xhr.send();
   }
   
   
@@ -93,22 +99,43 @@
   
   global.PostsList = [];
   export const loadPost = function(id) { 
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", firebaseURL+'/Posts/'+id+'/.json', false);
-	xhr.onload = function(e) {
-	//console.log(JSON.parse(xhr.responseText));
-	global.PostsList['selectedPost'] = JSON.parse(xhr.responseText);//pega um post especifico baseado no id na URL e salva numa variavel global que representa o post aberto(nao sei se da conflito com varios usuarios ao mesmo tempo)
-    
-	}
-	xhr.send();
+    Get(Url(id).singlePost,function(response){
+		global.PostsList['selectedPost'] = JSON.parse(JSON.parse(response).data); //coloca todos os posts na raiz do banco; numa variavel global.
+	});
   }
   
   export const loadForum = function() { //carrega todos os posts(que serao futuramente os mais recentes/populares)
+	Get(Url().posts,function(response){
+		var json = JSON.parse(JSON.parse(response).data); //sera que isso é um problema de performance?
+		global.PostsList = json; //coloca todos os posts na raiz do banco; numa variavel global.
+	});
+  }
+
+  function Get(url,callback) {
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", firebaseURL+'/Posts'+'/.json',false);
-  xhr.onload = function(e) {
-	var json = JSON.parse(xhr.responseText);
-	global.PostsList = json; //coloca todos os posts na raiz do banco; numa variavel global.
-	}
-	xhr.send();
+  xhr.open("GET", url, false);
+  xhr.onload = function() {
+  callback(xhr.responseText);
+  //global.PostsList['selectedPost'] = JSON.parse(JSON.parse(xhr.responseText).data);
+  };
+  xhr.send();
+  }
+  
+  function Url(PostID) {
+  return {
+   posts : PostUrl(),
+   singlePost : PostUrl(PostID),
+   respostas : RespostaUrl(PostID)
+  };
+  }
+  
+  function PostUrl(PostID) {
+  	if(PostID){
+  	return config.url+"/ForumPost/singlePost/"+PostID;	
+  	}
+  return config.url+"/ForumPost/postList/";
+  }  
+  
+  function RespostaUrl(PostID) {
+  return config.url+"/ForumPost/singlePost/"+PostID+"/Answers";	  
   }

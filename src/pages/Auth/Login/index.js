@@ -6,7 +6,7 @@ import { ReactComponent as Logo } from 'assets/logo/FlowLogo.svg';
 import {Header} from 'components/Navbar/styles';
 import {DivBanner} from 'pages/Landing/styles';
 import {Overlay} from 'pages/Auth/styles';
-import {config} from 'firebaseConfig';
+import {config} from 'serverConfig';
 import { Card, Button, CardTitle, CardText, Input, Label } from 'reactstrap';
 
 

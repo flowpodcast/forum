@@ -1,4 +1,4 @@
-export default class forumPost {
+export default class forumAPI {
   constructor(post, title, postID, rank, user) {
     const date = new Date().toLocaleDateString();
     this.post = post;
@@ -14,5 +14,8 @@ export default class forumPost {
   xhr.open(tipo, endereco);
   xhr.send(this.asPOJO);
   xhr.onload = callback;
+  }
+  getList(endereco,callback) {
+  
   }
 }

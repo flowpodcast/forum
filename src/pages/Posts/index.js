@@ -62,8 +62,9 @@ export default function Posts() {
 var location = useLocation();
 postID = location.pathname.split('/')[2];
 loadAnswers(postID);	
-loadPost(postID); //chama um post especifico, essa pagina nao deve abrir se o usuario acessar um perfil
-if(global.PostsList['selectedPost'] === null)
+loadPost(postID);
+var Post = global.PostsList['selectedPost']; //chama um post especifico, essa pagina nao deve abrir se o usuario acessar um perfil
+if(Post === null)
 {
 	return (<> <center><h1 style={{color:"White"}}>Erro: Post não existe.</h1></center> </>);
 }
@@ -86,11 +87,11 @@ return (
 		<aside style={{float:"left",width:"20%", height:"620px",color: "white"}} className="infos">
 		<center>
 		<figure/>
-		{global.PostsList['selectedPost'].user}
+		{Post.user}
 		</center>
 		</aside>
 		<center>
-		<div dangerouslySetInnerHTML={{__html: global.PostsList['selectedPost'].post}} className="post">
+		<div dangerouslySetInnerHTML={{__html: Post.post}} className="post">
 		</div>
 		</center>
 		</div>
@@ -98,7 +99,7 @@ return (
 		
         </div>
         <div className="group-infos">
-          <aside className="advertisement">advertisement rapá <button id="avaliaButton" onClick={() => updatePostRankClient(`${postID}`)}>↑ {global.PostsList['selectedPost'].rank.count} Avaliar Post</button></aside>
+          <aside className="advertisement">advertisement rapá <button id="avaliaButton" onClick={() => updatePostRankClient(`${postID}`)}>↑ {Post.rank.count} Avaliar Post</button></aside>
 		  <aside className="infos" />
         </div>
 
