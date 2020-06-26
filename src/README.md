@@ -1,23 +1,12 @@
-# Usando o Firebase como Banco de dados #
+# Conectando com o servidor para comunicar com o banco #
 
-Crie um projeto no site do firebase, na parte database selecione realtime database e copie o link.
+Esta parte do projeto é basicamente apenas o front end do fórum, para o fórum ser funcional, com login, upload de posts etc... é necessário
+hospedar e se comunicar com um servidor que funciona como um middleware para o firebase.
 
-Altere a constante firebaseURL no arquivo [config.js](config.js) para o link copiado. (sem os caracteres {}).
+Após ter o servidor online (verifique o projeto forum-api), crie um arquivo serverConfig.js na raiz do projeto (src), cole este trecho:
 
-No firebase, na pagina database selecione regras e troque read e write para true(isso tira todas as seguranças do banco para poder ser utilizado em ambiente de testes)
+> export const config = {
+> 	url: ""
+> };	
 
-O sistema estrutura o banco automáticamente, então basta fazer isso e acompanhar o banco.
-
-# Usando o Firebase para Autenticação email/senha #
-
-O Primeiro passo para permitir o cadastro e login com email e senha é importar as configurações do seu web app firebase.
-(Obs. é possível que mesmo com o hosting configurado o firebase não tenha um web app)
-
-No console do firebase clique nas configurações do projeto do lado de "Visão geral do projeto".
-
-Em "seus aplicativos" se não tiver um web app crie-o. Caso já tenha um web app copie o firebaseConfig 
-na opção radio Configuração do Firebase SDK snippet, cole em um arquivo nomeado serverConfig.js na raiz do projeto (src).
-
-# Regras do Firebase para que só possa 1 like por post #
-
-Verifique o arquivo [rules.json](rules.json).
+Dentro das aspas em url, cole o url do servidor.
