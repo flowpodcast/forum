@@ -13,88 +13,38 @@
   var enc = new TextDecoder("utf-8"); //decodificar os posts recebidos como array
   
   export const postarNoForum = function(post,titulo) { 
-  
 	var configPurify = { ADD_TAGS: ['iframe'], KEEP_CONTENT: false, ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] };
-    var postID = Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random e tirar do client
-	
 	var endereco = Url().posts;
-    var postJSON = new forumAPI(post,titulo,postID,'0',userObject.displayName);
+    var postJSON = new forumAPI(post,titulo,'0',userObject.displayName);
 	var callback = function () {window.location.href = window.location.href; /*trocar por algo mais solido como atualização de components.*/};
 	postJSON.send(endereco,callback);
   }
   
   export const responderForum = function(postID,post,titulo) {
 	var configPurify = { ADD_TAGS: ['iframe'], KEEP_CONTENT: false, ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] };
-	
-	var answerID = Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
-	//xhr.open('PATCH', );
-    var postJSON = new forumAPI(post,titulo,postID,'0',userObject.displayName);
-	var endereco = firebaseURL+'/Respostas/'+postID+'/'+answerID+'/.json';
+    var postJSON = new forumAPI(post,titulo,'0',userObject.displayName);
+	var endereco = Url(postID).respostas;
 	var callback = function () {window.location.href = window.location.href; /*trocar por algo mais solido como atualização de components.*/};
-	postJSON.send('PATCH',endereco,callback);
+	postJSON.send(endereco,callback);
 	
   }
   
-    global.AnswerList = [];
-    export const loadAnswers = function(postID) { //carrega todos os posts(que serao futuramente os mais recentes/populares)
-	
+  global.AnswerList = [];
+  export const loadAnswers = function(postID) { //carrega todos os posts(que serao futuramente os mais recentes/populares)
 	Get(Url(postID).respostas,function(response){
 		var json = JSON.parse(JSON.parse(response).data); //sera que isso é um problema de performance?
 		global.AnswerList = json; //coloca todos os posts na raiz do banco; numa variavel global.
 	});
-	
-    //var xhr = new XMLHttpRequest();
-    //Get(firebaseURL+'/Respostas/'+postID+'/.json',false);
-    //xhr.onload = function(e) {
-	//var json = JSON.parse(xhr.responseText);
-	//global.AnswerList = json; //coloca todos os posts na raiz do banco; numa variavel global.
-	//}
-	//xhr.send();
   }
   
   
   export const updatePostRank = function(postID) {
-  var xhr = new XMLHttpRequest(); //*
-  var RankAtual=0;	  
-  xhr.open('GET', firebaseURL+'/Posts/'+postID+'/rank/.json',true);
-  xhr.send();
-  xhr.onload = function(e) {
-  RankAtual = JSON.parse(xhr.responseText).count;
-  updatePostRankInternal(RankAtual,postID);
+  Get(Url(postID).rank,function(response){ //n implementei AINDA 12345678987654321`1234567898765432123456787654321
+		var json = JSON.parse(JSON.parse(response).data);
+		atualizarRankClient(parseInt(json)); //coloca todos os posts na raiz do banco; numa variavel global.
+	});
   }
-}
-  
-  function updatePostRankInternal(RankAtual,postID) {
-  var xhr = new XMLHttpRequest(); // * Prática cancerigena, alguem muda isso daqui.
-  xhr.open('PATCH', firebaseURL+'/Posts/'+postID+'/.json');
-  xhr.send('{"rank" : { "count": "'+(parseInt(RankAtual)+1).toString()+'","likedBy" : {"'+userObject.localId+'" : "true"}}}'); 
-  xhr.onload = function () {
-  if(JSON.parse(xhr.responseText).error === undefined) //se na hora de dar upvote a validação falhar pq ja tinha upvote ignore a parte de mudar pro client
-	  atualizarRankClient(parseInt(RankAtual)+1);
-  }
-  
-}
-  
-	//cloud firestore
-    //export const postarNoForum = function() {
-	//var userObject = JSON.parse(localStorage.getItem( 'userObject' ));
-	//var postID=Math.floor(1000 + Math.random() * 9000); //colocar algo mais garantido que random
-  	//var app = firebase.initializeApp(config);
-    //var db = firebase.firestore(app);
-    //    //firebase.firestore.setLogLevel("debug");
-	//	db.collection("Posts").doc(postID.toString()).set({
-    //    title: title,
-    //    post: post,
-    //    user: userObject.displayName
-	//    })
-	//    .then(function() {
-    //    window.location.reload(false);
-    //    })
-	//	.catch(function(error) {
-    //    console.error("Error writing document: ", error);
-	//	});
-	//}
-  
+
   global.PostsList = [];
   export const loadPost = function(id) { 
     Get(Url(id).singlePost,function(response){
@@ -123,7 +73,8 @@
   return {
    posts : PostUrl(),
    singlePost : PostUrl(PostID),
-   respostas : RespostaUrl(PostID)
+   respostas : RespostaUrl(PostID),
+   rank : RankUrl(PostID)
   };
   }
   
@@ -136,4 +87,8 @@
   
   function RespostaUrl(PostID) {
   return config.url+"/ForumPost/singlePost/"+PostID+"/Answers";	  
+  }
+  
+  function RankUrl(PostID) {
+  return config.url+"/ForumPost/singlePost/"+PostID+"/UpdateRank";
   }
